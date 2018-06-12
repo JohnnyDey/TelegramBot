@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+Будет удалено .gitignore
+Будет удалено .idea/inspectionProfiles/
+Будет удалено .idea/workspace.xml
+Будет удалено TelegramClient/src/test/
+Будет удалено TelegramClient/target/
+Будет удалено target/
