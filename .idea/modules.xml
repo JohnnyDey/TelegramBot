@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Server/Server.iml" filepath="$PROJECT_DIR$/Server/Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/TelegramBot.iml" filepath="$PROJECT_DIR$/TelegramBot.iml" />
       <module fileurl="file://$PROJECT_DIR$/TelegramClient/TelegramClient.iml" filepath="$PROJECT_DIR$/TelegramClient/TelegramClient.iml" />
     </modules>
