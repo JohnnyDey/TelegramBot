@@ -4,9 +4,14 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Startup;
+
+@Startup
 public class Initializer {
 
-    public static void main(String... a){
+    @PostConstruct
+    public void init(){
         ApiContextInitializer.init();
 
         TelegramBotsApi botsApi = new TelegramBotsApi();
@@ -14,7 +19,7 @@ public class Initializer {
         try {
             botsApi.registerBot(new MyBot());
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

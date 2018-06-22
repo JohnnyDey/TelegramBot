@@ -1,23 +1,47 @@
 package bot;
 
+import jpa.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.objects.Chat;
+import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import jpa.service.UserService;
 
 import java.io.Serializable;
 
 
 public class MyBot extends TelegramLongPollingBot{
+
+    @Autowired
+    private UserService userServiceImp;
+
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            if("/start".equals(update.getMessage().getText())){
-                sendMessage(update.getMessage().getChatId(), RandomFraserUtil.getFirstGreetFrase());
-                sendMessage(update.getMessage().getChatId(), RandomFraserUtil.getSecondGreetFrase());
+            Message message = update.getMessage();
+            if("/start".equals(message.getText())){
+                registerIfNeed(message.getChat());
+
+                sendMessage(message.getChatId(), RandomFraserUtil.getFirstGreetFrase(message.getChat().getUserName()));
+                sendMessage(message.getChatId(), RandomFraserUtil.getSecondGreetFrase());
             } else {
-                sendMessage(update.getMessage().getChatId(), RandomFraserUtil.getRandomFrase());
+                sendMessage(message.getChatId(), RandomFraserUtil.getRandomFrase());
             }
+        }
+    }
+
+    private void registerIfNeed(Chat chat){
+        User user = userServiceImp.getUser(chat.getId());
+        if(user == null){
+            user = new User();
+            user.setFirstName(chat.getFirstName());
+            user.setLastName(chat.getLastName());
+            user.setUserName(chat.getUserName());
+            user.setTelegramId(chat.getId());
+            userServiceImp.saveUser(user);
         }
     }
 
@@ -44,6 +68,5 @@ public class MyBot extends TelegramLongPollingBot{
             e.printStackTrace();
         }
     }
-
 
 }

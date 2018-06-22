@@ -19,8 +19,8 @@ class RandomFraserUtil {
         return frases.get(new Random().nextInt(frases.size()));
     }
 
-    static String getFirstGreetFrase() {
-        return "Привет! Меня зовут котик Оскар. Я пока не научился читать, " +
+    static String getFirstGreetFrase(String name) {
+        return "Привет, " + name + "! Меня зовут котик Оскар. Я пока не научился читать, " +
                 "поэтому не пойму, что ты мне пишешь. Но зато я умею писать о себе" +
                 "интересные факты! Круто, да?";
     }
