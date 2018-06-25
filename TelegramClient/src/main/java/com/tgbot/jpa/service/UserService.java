@@ -1,10 +1,8 @@
-package jpa.service;
+package com.tgbot.jpa.service;
 
 
-import jpa.entity.User;
-import org.springframework.stereotype.Service;
+import com.tgbot.jpa.entity.User;
 
-@Service
 public interface UserService {
 
     User getUser(Long id);

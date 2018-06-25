@@ -1,7 +1,9 @@
-package bot;
+package com.tgbot.bot;
 
-import jpa.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tgbot.jpa.entity.User;
+import com.tgbot.jpa.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
@@ -9,15 +11,23 @@ import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import jpa.service.UserService;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.io.Serializable;
 
 
 public class MyBot extends TelegramLongPollingBot{
 
-    @Autowired
+    private Logger logger = LoggerFactory.getLogger(MyBot.class);
+
+    @Inject
     private UserService userServiceImp;
+
+    @PostConstruct
+    private void init(){
+        logger.info("Bot started");
+    }
 
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -25,10 +35,15 @@ public class MyBot extends TelegramLongPollingBot{
             if("/start".equals(message.getText())){
                 registerIfNeed(message.getChat());
 
-                sendMessage(message.getChatId(), RandomFraserUtil.getFirstGreetFrase(message.getChat().getUserName()));
-                sendMessage(message.getChatId(), RandomFraserUtil.getSecondGreetFrase());
+                sendMessage(message.getChatId(), RandomPhraseUtil.getFirstGreetPhrase(message.getChat().getUserName()));
+                sendMessage(message.getChatId(), RandomPhraseUtil.getSecondGreetPhrase());
+            } else if("/add".equals(message.getText())) {
+                registerIfNeed(message.getChat());
+            } else if("/get".equals(message.getText())) {
+                User user = userServiceImp.getUser(message.getChat().getId());
+                sendMessage(message.getChatId(), RandomPhraseUtil.getInfoPhrase(user));
             } else {
-                sendMessage(message.getChatId(), RandomFraserUtil.getRandomFrase());
+                sendMessage(message.getChatId(), RandomPhraseUtil.getRandomPhrase());
             }
         }
     }

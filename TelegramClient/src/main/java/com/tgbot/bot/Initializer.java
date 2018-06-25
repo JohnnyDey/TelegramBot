@@ -1,17 +1,24 @@
-package bot;
+package com.tgbot.bot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 @Startup
+@Singleton
 public class Initializer {
 
+    private Logger logger = LoggerFactory.getLogger(Integer.class);
+
     @PostConstruct
-    public void init(){
+    private void start(){
+        logger.info("Starting");
         ApiContextInitializer.init();
 
         TelegramBotsApi botsApi = new TelegramBotsApi();
@@ -19,7 +26,7 @@ public class Initializer {
         try {
             botsApi.registerBot(new MyBot());
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            logger.error("Failed! Cause: " + e.getMessage());
         }
     }
 }
