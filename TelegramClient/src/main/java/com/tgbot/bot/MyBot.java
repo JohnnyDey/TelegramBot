@@ -51,12 +51,7 @@ public class MyBot extends TelegramLongPollingBot{
     private void registerIfNeed(Chat chat){
         User user = userServiceImp.getUser(chat.getId());
         if(user == null){
-            user = new User();
-            user.setFirstName(chat.getFirstName());
-            user.setLastName(chat.getLastName());
-            user.setUserName(chat.getUserName());
-            user.setTelegramId(chat.getId());
-            userServiceImp.saveUser(user);
+            userServiceImp.saveUser(chat.getId(), chat.getFirstName(), chat.getLastName(), chat.getUserName());
         }
     }
 

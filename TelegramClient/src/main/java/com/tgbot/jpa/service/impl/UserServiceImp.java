@@ -13,16 +13,17 @@ public class UserServiceImp implements UserService {
     private EntityManager entityManager;
 
     public User getUser(Long id){
-        return entityManager.createQuery("from "+ User.class.getName() + " where user.telegramId = :id", User.class)
+        return entityManager.createQuery("from "+ User.class.getName() + " user where user.telegramId = :id", User.class)
             .setParameter("id", id)
             .getSingleResult();
     }
 
-    public void saveUser(Long id, String name, String last){
+    public void saveUser(Long id, String name, String last, String userName){
         User user = new User();
         user.setTelegramId(id);
         user.setFirstName(name);
         user.setLastName(last);
+        user.setUserName(userName);
         saveUser(user);
     }
 
