@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 
 public class UserServiceImp implements UserService {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "bot.persistence.tb")
     private EntityManager entityManager;
 
     public User getUser(Long id){
