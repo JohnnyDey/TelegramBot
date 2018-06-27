@@ -1,4 +1,4 @@
-package com.tgbot.jpa.entity;
+package jpa.entity;
 
 import javax.persistence.*;
 

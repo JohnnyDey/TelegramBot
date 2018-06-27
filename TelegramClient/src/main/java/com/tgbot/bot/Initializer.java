@@ -24,7 +24,7 @@ public class Initializer {
         TelegramBotsApi botsApi = new TelegramBotsApi();
 
         try {
-            botsApi.registerBot(new MyBot());
+            botsApi.registerBot(new TelegramBot());
         } catch (TelegramApiException e) {
             logger.error("Failed! Cause: " + e.getMessage());
         }

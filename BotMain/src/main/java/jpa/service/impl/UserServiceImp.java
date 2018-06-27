@@ -1,7 +1,7 @@
-package com.tgbot.jpa.service.impl;
+package jpa.service.impl;
 
-import com.tgbot.jpa.entity.User;
-import com.tgbot.jpa.service.UserService;
+import jpa.entity.User;
+import jpa.service.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

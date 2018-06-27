@@ -4,15 +4,10 @@
     <name>Telegram Bot root</name>
     <modules>
         <module>TelegramClient</module>
+        <module>BotMain</module>
     </modules>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.2.RELEASE</version>
-    </parent>
-
-    <groupId>TelegramBot.com</groupId>
-    <artifactId>TelegramBot</artifactId>
+    <groupId>Bot.com</groupId>
+    <artifactId>Bot</artifactId>
     <version>1.0-SNAPSHOT</version>
 </project>

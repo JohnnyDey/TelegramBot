@@ -1,7 +1,7 @@
 package com.tgbot.bot;
 
-import com.tgbot.jpa.entity.User;
-import com.tgbot.jpa.service.UserService;
+import jpa.entity.User;
+import jpa.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
@@ -17,9 +17,9 @@ import javax.inject.Inject;
 import java.io.Serializable;
 
 
-public class MyBot extends TelegramLongPollingBot{
+public class TelegramBot extends TelegramLongPollingBot{
 
-    private Logger logger = LoggerFactory.getLogger(MyBot.class);
+    private Logger logger = LoggerFactory.getLogger(TelegramBot.class);
 
     @Inject
     private UserService userServiceImp;

@@ -1,6 +1,6 @@
 package com.tgbot.bot;
 
-import com.tgbot.jpa.entity.User;
+import jpa.entity.User;
 
 import java.util.Arrays;
 import java.util.List;

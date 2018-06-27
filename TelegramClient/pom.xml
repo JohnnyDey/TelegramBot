@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>TelegramBot</artifactId>
-        <groupId>TelegramBot.com</groupId>
+        <groupId>Bot.com</groupId>
+        <artifactId>Bot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -17,18 +17,19 @@
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
-            <version>LATEST</version>
+            <version>3.1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>Bot.com</groupId>
+            <artifactId>BotMain</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

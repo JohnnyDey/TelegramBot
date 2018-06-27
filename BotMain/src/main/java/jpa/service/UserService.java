@@ -1,7 +1,7 @@
-package com.tgbot.jpa.service;
+package jpa.service;
 
 
-import com.tgbot.jpa.entity.User;
+import jpa.entity.User;
 
 public interface UserService {
 
