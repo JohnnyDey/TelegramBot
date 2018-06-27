@@ -5,6 +5,7 @@
     <modules>
         <module>TelegramClient</module>
         <module>BotMain</module>
+        <module>VKClient</module>
     </modules>
 
     <groupId>Bot.com</groupId>
