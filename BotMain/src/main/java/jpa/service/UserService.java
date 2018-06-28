@@ -7,7 +7,13 @@ public interface UserService {
 
     User getUser(Long id);
 
-    void saveUser(Long id, String name, String last, String userName);
+    User getUserByVkId(Long id);
+
+    User getUserByTelegramId(Long id);
+
+    User getUserByTelegramOrVkId(Long tgId, Long vkId);
+
+    void saveUser(Long telegramId, Long vkId, String name, String last, String userName);
 
     void saveUser(User user);
 }

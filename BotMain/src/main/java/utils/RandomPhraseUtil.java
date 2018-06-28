@@ -1,4 +1,4 @@
-package com.tgbot.bot;
+package utils;
 
 import jpa.entity.User;
 
@@ -34,14 +34,11 @@ class RandomPhraseUtil {
 
     static String getInfoPhrase(User user) {
         StringBuilder sb = new StringBuilder();
-        if(user.getFirstName() != null) {
-            sb.append("Твое имя: ").append(user.getFirstName()).append(".\n");
+        if(user.getTgName() != null) {
+            sb.append("Твое имя в телеграме - ").append(user.getTgName()).append(".\n");
         }
-        if(user.getLastName() != null) {
-            sb.append("Фамилия у тебя: ").append(user.getLastName()).append(".\n");
-        }
-        if(user.getUserName() != null) {
-            sb.append("В телеграме тебя знают, как ").append(user.getUserName()).append(".\n");
+        if(user.getVkName() != null) {
+            sb.append("В вк тебя знают, как ").append(user.getVkName()).append(".\n");
         }
         return sb.toString();
     }

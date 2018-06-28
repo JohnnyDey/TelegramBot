@@ -6,16 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="BotMain" />
         <module name="oscar" />
         <module name="Server" />
         <module name="TelegramClient" />
+        <module name="VKClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BotMain" target="1.5" />
       <module name="oscar" target="1.8" />
       <module name="Server" target="1.8" />
-      <module name="TelegramBot" target="1.8" />
-      <module name="TelegramClient" target="1.8" />
+      <module name="TelegramBot" target="1.5" />
+      <module name="TelegramClient" target="8" />
+      <module name="VKClient" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

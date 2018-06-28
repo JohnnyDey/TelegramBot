@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BotMain/BotMain.iml" filepath="$PROJECT_DIR$/BotMain/BotMain.iml" />
       <module fileurl="file://$PROJECT_DIR$/TelegramBot.iml" filepath="$PROJECT_DIR$/TelegramBot.iml" />
       <module fileurl="file://$PROJECT_DIR$/TelegramClient/TelegramClient.iml" filepath="$PROJECT_DIR$/TelegramClient/TelegramClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VKClient/VKClient.iml" filepath="$PROJECT_DIR$/VKClient/VKClient.iml" />
     </modules>
   </component>
 </project>

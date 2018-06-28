@@ -6,17 +6,20 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @Column(name = "telegramId")
+    @Column
+    private Long id;
+
+    @Column
     private Long telegramId;
 
-    @Column(name = "firstName")
-    private String firstName;
+    @Column
+    private Long vkId;
 
-    @Column(name = "lastName")
-    private String lastName;
+    @Column
+    private String tgName;
 
-    @Column(name = "userName")
-    private String userName;
+    @Column
+    private String vkName;
 
     public Long getTelegramId() {
         return telegramId;
@@ -26,27 +29,35 @@ public class User {
         this.telegramId = telegramId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getTgName() {
+        return tgName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setTgName(String firstName) {
+        this.tgName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getVkName() {
+        return vkName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setVkName(String lastName) {
+        this.vkName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getVkId() {
+        return vkId;
+    }
+
+    public void setVkId(Long vkId) {
+        this.vkId = vkId;
     }
 }
