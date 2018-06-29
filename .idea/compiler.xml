@@ -14,7 +14,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="BotMain" target="1.5" />
+      <module name="BotMain" target="8" />
       <module name="oscar" target="1.8" />
       <module name="Server" target="1.8" />
       <module name="TelegramBot" target="1.5" />

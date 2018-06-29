@@ -1,5 +1,6 @@
 package com.tgbot.bot;
 
+import com.tgbot.utils.TgDecider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
@@ -7,7 +8,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import utils.TgDecider;
+import com.tgbot.utils.TgDeciderImpl;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;

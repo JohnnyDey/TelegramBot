@@ -1,11 +1,16 @@
 package com.vkbot.bot;
 
+import action.TimerRemind;
 import com.petersamokhin.bots.sdk.clients.Group;
 import com.petersamokhin.bots.sdk.objects.Message;
 import com.vkbot.utils.VkDecider;
+import jpa.entity.TimerId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.util.List;
 
@@ -39,4 +44,13 @@ public class VkBot extends Group {
         });
     }
 
+    public void timeout(@Observes TimerRemind timerRemind){
+        TimerId id = timerRemind.getId();
+        logger.info("Send msg: " + id);
+        new Message()
+                .from(this)
+                .to(Math.toIntExact(id.getId()))
+                .text(id.getMsg())
+                .send();
+    }
 }

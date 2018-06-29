@@ -61,4 +61,15 @@ public class User {
     public void setVkId(Long vkId) {
         this.vkId = vkId;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", telegramId=" + telegramId +
+                ", vkId=" + vkId +
+                ", tgName='" + tgName + '\'' +
+                ", vkName='" + vkName + '\'' +
+                '}';
+    }
 }

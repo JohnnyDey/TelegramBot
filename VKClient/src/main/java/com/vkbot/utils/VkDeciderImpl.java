@@ -2,6 +2,7 @@ package com.vkbot.utils;
 
 import com.petersamokhin.bots.sdk.objects.Message;
 import jpa.entity.User;
+import startegy.RegisterCommand;
 import utils.PhraseDecider;
 
 import javax.ejb.Stateless;
@@ -14,17 +15,16 @@ public class VkDeciderImpl extends PhraseDecider implements VkDecider{
         if(userByVkId == null){
             userByVkId = new User();
             userByVkId.setVkId(Long.valueOf(message.authorId()));
-            register(userByVkId);
+            new RegisterCommand().altExecute(userByVkId);
         }
-        return onText(message.getText(), userByVkId);
+        return onText(message.getText().trim(), userByVkId);
     }
 
 
     @Override
-    public void updateName(User user, String name) {
-        userServiceImp.getUserByVkId(user.getVkId());
+    public User updateName(User user, String name) {
         user.setVkName(name);
-        register(user);
+        return user;
     }
 
     @Override
