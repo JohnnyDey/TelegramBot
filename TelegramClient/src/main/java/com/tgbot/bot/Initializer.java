@@ -18,13 +18,14 @@ public class Initializer {
 
     @PostConstruct
     private void start(){
-        logger.info("Starting");
+        logger.info("Telegram starting");
         ApiContextInitializer.init();
 
         TelegramBotsApi botsApi = new TelegramBotsApi();
 
         try {
             botsApi.registerBot(new TelegramBot());
+            logger.info("Telegram started");
         } catch (TelegramApiException e) {
             logger.error("Failed! Cause: " + e.getMessage());
         }
