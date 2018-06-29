@@ -10,31 +10,37 @@ import java.util.List;
 public abstract class PhraseDecider {
 
     @Inject
-    UserService userServiceImp;
+    protected UserService userServiceImp;
 
-    List<String> onText(String message, User user){
+    protected List<String> onText(String message, User user){
         List<String> phrases = new ArrayList<String>();
         if("/start".equals(message)){
-            register(user);
-
             phrases.add(RandomPhraseUtil.getFirstGreetPhrase(getName(user)));
             phrases.add(RandomPhraseUtil.getSecondGreetPhrase());
-        } else if("/add".equals(message)) {
-            register(user);
-        } else if("/get".equals(message)) {
-            User storedUser = userServiceImp.getUser(getId(user));
-            phrases.add(RandomPhraseUtil.getInfoPhrase(storedUser));
+        } if(message.startsWith("/register")){
+            updateName(user, message.replace("/register", "") );
+            phrases.add(RandomPhraseUtil.registered(user.getVkName()));
+        } else if("/info".equals(message)) {
+            if(user.getId() == null){
+                user = getUserById(user);
+            }
+            phrases.add(RandomPhraseUtil.getInfoPhrase(user));
         } else {
             phrases.add(RandomPhraseUtil.getRandomPhrase());
         }
         return phrases;
     }
 
+    public abstract void updateName(User user, String name);
+
     public abstract Long getId(User user);
 
     public abstract String getName(User user);
 
-    void register(User user){
+    public abstract User getUserById(User user);
+
+    protected void register(User user){
         userServiceImp.saveUser(user);
+
     }
 }

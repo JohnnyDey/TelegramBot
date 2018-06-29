@@ -18,12 +18,25 @@ public class TgDecider extends PhraseDecider {
         return onText(message.getText(), userByTelegramId);
     }
 
+    @Override
+    public void updateName(User user, String name) {
 
+    }
+
+    @Override
     public Long getId(User user) {
         return user.getTelegramId();
     }
 
+    @Override
     public String getName(User user) {
         return user.getTgName();
     }
+
+    @Override
+    public User getUserById(User user) {
+        return userServiceImp.getUserByTelegramId(user.getTelegramId());
+    }
+
+
 }
