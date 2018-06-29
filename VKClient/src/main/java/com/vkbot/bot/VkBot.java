@@ -8,8 +8,6 @@ import jpa.entity.TimerId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.util.List;

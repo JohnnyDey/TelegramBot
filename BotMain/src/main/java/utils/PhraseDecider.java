@@ -1,6 +1,7 @@
 package utils;
 
 import jpa.entity.User;
+import jpa.service.TimersService;
 import jpa.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,12 @@ public abstract class PhraseDecider {
 
     @Inject
     protected UserService userServiceImp;
+
+    @Inject
+    private TimersService timersService;
+
+    @Inject
+    private PhraseUtil phraseUtil;
 
     protected List<String> onText(String message, User user){
         logger.debug("User " + user + "send message: " + message);
@@ -42,6 +49,11 @@ public abstract class PhraseDecider {
         } else {
             command = new GeneralCommand();
         }
+
+        //костыли убрать
+        command.setPhraseUtil(phraseUtil);
+        command.setTimersService(timersService);
+        command.setUserServiceImp(userServiceImp);
         return command.execute(message, user);
     }
 

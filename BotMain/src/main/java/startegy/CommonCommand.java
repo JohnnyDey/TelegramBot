@@ -1,12 +1,9 @@
 package startegy;
 
-import jpa.entity.User;
 import jpa.service.TimersService;
 import jpa.service.UserService;
 import utils.PhraseUtil;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,13 +11,10 @@ import java.util.Map;
 
 public class CommonCommand {
 
-    @Inject
     UserService userServiceImp;
 
-    @Inject
     TimersService timersService;
 
-    @Inject
     PhraseUtil phraseUtil;
 
     Map<String, Object> args = new HashMap<>();
@@ -29,5 +23,17 @@ public class CommonCommand {
 
     public void putArgs(String key, Object val){
         args.put(key, val);
+    }
+
+    public void setUserServiceImp(UserService userServiceImp) {
+        this.userServiceImp = userServiceImp;
+    }
+
+    public void setTimersService(TimersService timersService) {
+        this.timersService = timersService;
+    }
+
+    public void setPhraseUtil(PhraseUtil phraseUtil) {
+        this.phraseUtil = phraseUtil;
     }
 }
