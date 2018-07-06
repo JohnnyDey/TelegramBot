@@ -107,6 +107,13 @@ public class PhraseUtil {
         return list;
     }
 
+    public List<Object> ok(){
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("common.ok"));
+        list.add(StickerCollector.thumbUp);
+        return list;
+    }
+
 
     public String howToNotify() {
         return properties.getProperty("notify.disclaimer");
@@ -114,5 +121,16 @@ public class PhraseUtil {
 
     public String getNotifyHelp() {
         return properties.getProperty("notify.help");
+    }
+
+    public List<Object> timeZoneEmpty() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("timer.timezone.empty"));
+        list.add(StickerCollector.pleased);
+        return list;
+    }
+
+    public String badTimeZone() {
+        return properties.getProperty("timer.timezone.bad");
     }
 }

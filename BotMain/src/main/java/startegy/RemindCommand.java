@@ -18,6 +18,7 @@ public class RemindCommand extends CommonCommand implements Command {
 
 
     public static final String ID_ARG = "id";
+    public static final String TIME_ZONE = "time_zone";
 
     @Override
     public List<Object> execute(String message, User user) {
@@ -57,6 +58,11 @@ public class RemindCommand extends CommonCommand implements Command {
 
     private Date zonedDateToDate(LocalDateTime localDateTime){
         //ZoneId.of("UTC+0");
-        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        String timeZone = (String) args.get(TIME_ZONE);
+        if(timeZone != null){
+            return Date.from(localDateTime.atZone(ZoneId.of("UTC"+timeZone)).toInstant());
+        } else {
+            return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        }
     }
 }
