@@ -27,9 +27,7 @@ public class TimersService {
     }
 
     public void startTimer(Date date, Long to, String msg) {
-        ScheduleExpression schedule = new ScheduleExpression();
-        schedule.start(date);
-        timerService.createCalendarTimer(schedule, new TimerConfig(new TimerId(to, msg), true));
+        timerService.createSingleActionTimer(date, new TimerConfig(new TimerId(to, msg), true));
     }
 
     public boolean stopTimer(String id) {

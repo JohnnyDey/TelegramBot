@@ -6,8 +6,8 @@ import java.util.List;
 
 public class HelpCommand extends CommonCommand implements Command{
     @Override
-    public List<String> execute(String message, User user) {
-        phrases.add(phraseUtil.getHelp());
+    public List<Object> execute(String message, User user) {
+        phrases.addAll(phraseUtil.getHelp());
         return phrases;
     }
 }

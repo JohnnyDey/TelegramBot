@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TgDecider {
 
-    List<String> onText(Message message);
+    List<Object> onText(Message message);
 }

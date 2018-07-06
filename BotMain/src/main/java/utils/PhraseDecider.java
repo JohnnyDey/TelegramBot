@@ -1,5 +1,6 @@
 package utils;
 
+import action.NotifyAll;
 import jpa.entity.User;
 import jpa.service.TimersService;
 import jpa.service.UserService;
@@ -7,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import startegy.*;
 
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.util.List;
 
+import static startegy.NotifyAllCommand.EVENT;
 import static startegy.RemindCommand.ID_ARG;
 import static startegy.StartCommand.NAME_ARG;
 
@@ -26,27 +29,30 @@ public abstract class PhraseDecider {
     @Inject
     private PhraseUtil phraseUtil;
 
-    protected List<String> onText(String message, User user){
+    @Inject
+    private Event<NotifyAll> notifyAllEvent;
+
+    protected List<Object> onText(String message, User user){
         logger.debug("User " + user + "send message: " + message);
         Command command;
-        if("/timers".equals(message)){
+        if(message.startsWith("/timers")){
             command = new TimersCommand();
         } else if("/start".equals(message)){
             command = new StartCommand();
-            command.putArgs(NAME_ARG, getName(user));
+            command.putArgs(NAME_ARG, user.getUserName());
         } else if(message.startsWith("/remind")){
             command = new RemindCommand();
-            command.putArgs(ID_ARG, getId(user));
+            command.putArgs(ID_ARG, user.getAppId());
         } else if("/help".equals(message)) {
             command = new HelpCommand();
         } else if(message.startsWith("/register")){
             command = new RegisterCommand();
         } else if("/info".equals(message)) {
-            if(user.getId() == null){
-                user = getUserById(user);
-            }
             command = new InfoCommand();
-        } else {
+        } else if(message.startsWith("/notifyEveryOne")){
+            command = new NotifyAllCommand();
+            command.putArgs(EVENT, notifyAllEvent);
+        }else  {
             command = new GeneralCommand();
         }
 
@@ -57,11 +63,4 @@ public abstract class PhraseDecider {
         return command.execute(message, user);
     }
 
-    public abstract User updateName(User user, String name);
-
-    public abstract Long getId(User user);
-
-    public abstract String getName(User user);
-
-    public abstract User getUserById(User user);
 }

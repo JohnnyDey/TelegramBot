@@ -1,15 +1,11 @@
 package utils;
 
-import com.sun.javafx.binding.StringFormatter;
 import jpa.entity.User;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 public class PhraseUtil {
 
@@ -20,7 +16,7 @@ public class PhraseUtil {
         properties.load(new InputStreamReader(resourceAsStream));
     }
 
-    private List<String> phrases = Arrays.asList(
+    private List<Object> phrases = Arrays.asList(
             "Я могу копать свой горшочек на протяжении нескольких минут. В январе я установил новый рекорд - 12 минут безпрерывного копания!",
             "Я начинающий блогер. На моем ютуб канале скоро выйдут про меня мультки. Я обязательно тебе скину ссылку.",
             "В детстве мои хозяева думали, что я девочка... но я не люблю об этом говорить",
@@ -29,49 +25,71 @@ public class PhraseUtil {
             "Мой любимый цвет: белый, любимое живтное: кот, любимое существо: я"
     );
 
-    public String getRandomPhrase(){
+    public Object getRandomPhrase(){
         return phrases.get(new Random().nextInt(phrases.size()));
     }
 
-    public String getFirstGreetPhrase(String name) {
-        return String.format(properties.getProperty("greet.one"), name);
+    public List<Object> getGreetPhrases(Object name) {
+        List<Object> list = new ArrayList<>();
+        list.add(String.format(properties.getProperty("greet.one"), name));
+        list.add(properties.getProperty("greet.two"));
+        list.add(StickerCollector.smile);
+        return list;
     }
 
-    public String getSuccessTimedPhrase() {
-        return properties.getProperty("timer.ok");
+    public List<Object> getSuccessTimedPhrase() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("timer.ok"));
+        list.add(StickerCollector.thumbUp);
+        return list;
     }
 
-    public String getFailesTimedPhrase(String form1, String form2) {
-        return String.format(properties.getProperty("timer.fail"), form1, form2);
+    public List<Object> getFailedTimedPhrase(Object form1, Object form2, Object form3) {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("timer.fail.one"));
+        list.add(StickerCollector.feelsBad);
+        list.add(String.format(properties.getProperty("timer.fail.two"), form1, form2, form3));
+        list.add(properties.getProperty("timer.fail.three"));
+        return list;
+
     }
 
-    public String getSecondGreetPhrase() {
-        return properties.getProperty("greet.two");
+    public List<Object> registered(Object name){
+        List<Object> list = new ArrayList<>();
+        list.add(String.format(properties.getProperty("register.ok"), name));
+        list.add(StickerCollector.nice);
+        return list;
     }
 
-    public String registered(String name){
-        return String.format(properties.getProperty("register.ok"), name);
-    }
-
-    public String getInfoPhrase(User user) {
+    public List<Object> getInfoPhrase(User user) {
+        List<Object> list = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        if(user.getTgName() != null) {
-            sb.append(String.format(properties.getProperty("info.tg.name"), user.getTgName())).append("\n");
-        }
-        if(user.getVkName() != null) {
-            sb.append(String.format(properties.getProperty("info.vk.name"), user.getVkName())).append("\n");
+        if(user.getUserName() != null) {
+            sb.append(String.format(properties.getProperty("info.name"), user.getUserName())).append("\n");
         }
         if(sb.length() == 0){
-            sb.append(properties.getProperty("info.unknown"));
+            list.add(properties.getProperty("info.unknown.one"));
+            list.add(StickerCollector.anonymous);
+            list.add(properties.getProperty("info.unknown.two"));
+            list.add(properties.getProperty("info.unknown.three"));
+        } else {
+            list.add(sb.toString());
+            list.add(StickerCollector.glad);
         }
-        return sb.toString();
+        return list;
     }
 
-    public String getHelp() {
-        return properties.getProperty("help.list");
+    public List<Object> getHelp() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("help.list"));
+        list.add(StickerCollector.relax);
+        return list;
     }
 
-    public String emptyName() {
-        return properties.getProperty("register.empty.name");
+    public List<Object> emptyName() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("register.empty.name"));
+        list.add(StickerCollector.oops);
+        return list;
     }
 }

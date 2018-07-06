@@ -19,7 +19,7 @@ public class CommonCommand {
 
     Map<String, Object> args = new HashMap<>();
 
-    List<String> phrases = new ArrayList<>();
+    List<Object> phrases = new ArrayList<>();
 
     public void putArgs(String key, Object val){
         args.put(key, val);

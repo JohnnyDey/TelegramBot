@@ -8,14 +8,14 @@ public class RegisterCommand extends CommonCommand implements Command{
 
 
     @Override
-    public List<String> execute(String message, User user) {
+    public List<Object> execute(String message, User user) {
         String name = message.replace("/register", "").trim();
         if(name.length() == 0 ){
-            phrases.add(phraseUtil.emptyName());
+            phrases.addAll(phraseUtil.emptyName());
         }else {
-            user.setVkName(name);
+            user.setUserName(name);
             userServiceImp.saveUser(user);
-            phrases.add(phraseUtil.registered(user.getVkName()));
+            phrases.addAll(phraseUtil.registered(user.getUserName()));
         }
         return phrases;
     }

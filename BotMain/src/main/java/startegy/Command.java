@@ -8,7 +8,7 @@ import utils.PhraseUtil;
 import java.util.List;
 
 public interface Command {
-    List<String> execute(String message, User user);
+    List<Object> execute(String message, User user);
 
     void putArgs(String key, Object val);
 

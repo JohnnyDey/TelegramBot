@@ -1,10 +1,12 @@
 package com.vkbot.bot;
 
+import action.NotifyAll;
 import action.TimerRemind;
 import com.petersamokhin.bots.sdk.clients.Group;
 import com.petersamokhin.bots.sdk.objects.Message;
 import com.vkbot.utils.VkDecider;
 import jpa.entity.TimerId;
+import jpa.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,12 +35,15 @@ public class VkBot extends Group {
 
     void setHandler(){
         this.onSimpleTextMessage(message ->{
-            List<String> strings = decider.onText(message);
-            strings.forEach(s -> new Message()
-                                        .from(this)
-                                        .to(message.authorId())
-                                        .text(s)
-                                        .send());
+            List<Object> strings = decider.onText(message);
+            strings.forEach(o -> {
+                if(o instanceof String){
+                    new Message().from(this).to(message.authorId()).text(o).send();
+                } else if(o instanceof Integer){
+                    new Message().from(this).to(message.authorId()).sticker((Integer)o).send();
+                }
+
+            });
         });
     }
 
@@ -50,5 +55,17 @@ public class VkBot extends Group {
                 .to(Math.toIntExact(id.getId()))
                 .text(id.getMsg())
                 .send();
+    }
+
+    public void notify(@Observes NotifyAll notifyAll){
+        notifyAll.getUsersToNotify().forEach(user -> {
+            if(user.getAppType().equals(User.AppType.VK.name())){
+                new Message()
+                        .from(this)
+                        .to(Math.toIntExact(user.getId()))
+                        .text(notifyAll.getMsg())
+                        .send();
+            }
+        });
     }
 }

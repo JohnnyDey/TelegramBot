@@ -11,39 +11,31 @@ public class User {
     private Long id;
 
     @Column
-    private Long telegramId;
+    private Long appId;
 
     @Column
-    private Long vkId;
+    private String appType;
 
     @Column
-    private String tgName;
+    private String userName;
 
     @Column
-    private String vkName;
+    private boolean notify;
 
-    public Long getTelegramId() {
-        return telegramId;
+    public Long getAppId() {
+        return appId;
     }
 
-    public void setTelegramId(Long telegramId) {
-        this.telegramId = telegramId;
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
-    public String getTgName() {
-        return tgName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setTgName(String firstName) {
-        this.tgName = firstName;
-    }
-
-    public String getVkName() {
-        return vkName;
-    }
-
-    public void setVkName(String lastName) {
-        this.vkName = lastName;
+    public void setUserName(String name) {
+        this.userName = name;
     }
 
     public Long getId() {
@@ -54,22 +46,24 @@ public class User {
         this.id = id;
     }
 
-    public Long getVkId() {
-        return vkId;
+    public boolean isNotify() {
+        return notify;
     }
 
-    public void setVkId(Long vkId) {
-        this.vkId = vkId;
+    public void setNotify(boolean notify) {
+        this.notify = notify;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", telegramId=" + telegramId +
-                ", vkId=" + vkId +
-                ", tgName='" + tgName + '\'' +
-                ", vkName='" + vkName + '\'' +
-                '}';
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
+    }
+
+    public enum AppType{
+        VK,
+        TG
     }
 }
