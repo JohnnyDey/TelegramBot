@@ -16,6 +16,7 @@ public class NotifyAllCommand extends CommonCommand implements Command {
         NotifyAll notifyAll = new NotifyAll();
         notifyAll.setUsersToNotify(userServiceImp.getAllUsersToNotify());
         notifyAll.setMsg(message);
+        notifyAll.setDisclaimer(phraseUtil.howToNotify());
         ((Event<NotifyAll>) args.get(EVENT)).fire(notifyAll);
         return Collections.emptyList();
     }

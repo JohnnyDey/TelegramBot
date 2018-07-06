@@ -92,4 +92,27 @@ public class PhraseUtil {
         list.add(StickerCollector.oops);
         return list;
     }
+
+    public List<Object> notifyNo(){
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("notify.no"));
+        list.add(StickerCollector.sad);
+        return list;
+    }
+
+    public List<Object> notifyYes(){
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("notify.yes"));
+        list.add(StickerCollector.thumbUp);
+        return list;
+    }
+
+
+    public String howToNotify() {
+        return properties.getProperty("notify.disclaimer");
+    }
+
+    public String getNotifyHelp() {
+        return properties.getProperty("notify.help");
+    }
 }

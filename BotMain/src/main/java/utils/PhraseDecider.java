@@ -37,7 +37,9 @@ public abstract class PhraseDecider {
         Command command;
         if(message.startsWith("/timers")){
             command = new TimersCommand();
-        } else if("/start".equals(message)){
+        } else if (message.startsWith("/spam")){
+            command = new NotificationCommand();
+        }else if("/start".equals(message)){
             command = new StartCommand();
             command.putArgs(NAME_ARG, user.getUserName());
         } else if(message.startsWith("/remind")){
@@ -60,7 +62,7 @@ public abstract class PhraseDecider {
         command.setPhraseUtil(phraseUtil);
         command.setTimersService(timersService);
         command.setUserServiceImp(userServiceImp);
-        return command.execute(message, user);
+        return command.execute(message.replace("/notifyEveryOne", "").trim(), user);
     }
 
 }

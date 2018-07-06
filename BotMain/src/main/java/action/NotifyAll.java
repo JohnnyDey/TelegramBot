@@ -7,6 +7,7 @@ import java.util.List;
 public class NotifyAll {
 
     private String msg;
+    private String disclaimer;
     private List<User> usersToNotify;
 
     public List<User> getUsersToNotify() {
@@ -23,5 +24,13 @@ public class NotifyAll {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getDisclaimer() {
+        return disclaimer;
+    }
+
+    public void setDisclaimer(String disclaimer) {
+        this.disclaimer = disclaimer;
     }
 }

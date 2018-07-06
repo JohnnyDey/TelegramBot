@@ -50,22 +50,15 @@ public class VkBot extends Group {
     public void timeout(@Observes TimerRemind timerRemind){
         TimerId id = timerRemind.getId();
         logger.info("Send msg: " + id);
-        new Message()
-                .from(this)
-                .to(Math.toIntExact(id.getId()))
-                .text(id.getMsg())
-                .send();
+        new Message().from(this).to(Math.toIntExact(id.getId())).text(id.getMsg()).send();
     }
 
     public void notify(@Observes NotifyAll notifyAll){
-        notifyAll.getUsersToNotify().forEach(user -> {
+        for(User user : notifyAll.getUsersToNotify()){
             if(user.getAppType().equals(User.AppType.VK.name())){
-                new Message()
-                        .from(this)
-                        .to(Math.toIntExact(user.getId()))
-                        .text(notifyAll.getMsg())
-                        .send();
+                new Message().from(this).to(Math.toIntExact(user.getAppId())).text(notifyAll.getMsg()).send();
+                new Message().from(this).to(Math.toIntExact(user.getAppId())).text(notifyAll.getDisclaimer()).send();
             }
-        });
+        }
     }
 }
