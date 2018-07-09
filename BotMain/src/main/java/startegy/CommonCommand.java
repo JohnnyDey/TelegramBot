@@ -1,5 +1,6 @@
 package startegy;
 
+import jpa.entity.User;
 import jpa.service.TimersService;
 import jpa.service.UserService;
 import utils.PhraseUtil;
@@ -21,6 +22,8 @@ public class CommonCommand {
 
     List<Object> phrases = new ArrayList<>();
 
+    private boolean stopped = false;
+
     public void putArgs(String key, Object val){
         args.put(key, val);
     }
@@ -35,5 +38,21 @@ public class CommonCommand {
 
     public void setPhraseUtil(PhraseUtil phraseUtil) {
         this.phraseUtil = phraseUtil;
+    }
+
+    public boolean isStopped(){
+        return stopped;
+    }
+
+    public void stop(){
+        stopped = true;
+    }
+
+    public List<Object> nextPhase(String message, User user){
+        return null;
+    }
+
+    public void clearPhases(){
+        phrases.clear();
     }
 }

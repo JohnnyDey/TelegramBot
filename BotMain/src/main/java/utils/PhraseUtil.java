@@ -5,7 +5,9 @@ import jpa.entity.User;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 public class PhraseUtil {
 
@@ -16,25 +18,38 @@ public class PhraseUtil {
         properties.load(new InputStreamReader(resourceAsStream));
     }
 
-    private List<Object> phrases = Arrays.asList(
-            "Я могу копать свой горшочек на протяжении нескольких минут. В январе я установил новый рекорд - 12 минут безпрерывного копания!",
-            "Я начинающий блогер. На моем ютуб канале скоро выйдут про меня мультки. Я обязательно тебе скину ссылку.",
-            "В детстве мои хозяева думали, что я девочка... но я не люблю об этом говорить",
-            "Моё любимое развлечение: сидеть за диваном и неожиданно выпрыгивать на зазевавшихся прохожих. Если не считать развлечения обедом.",
-            "Я очень не люблю дверной косяк. Однако, пока мне не удалось выгнать его из дома прыжками.",
-            "Мой любимый цвет: белый, любимое живтное: кот, любимое существо: я"
-    );
-
-    public Object getRandomPhrase(){
-        return phrases.get(new Random().nextInt(phrases.size()));
+    public List<Object> timeZoneEmpty() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("timer.timezone.empty"));
+        list.add(StickerCollector.pleased);
+        return list;
     }
 
-    public List<Object> getGreetPhrases(Object name) {
+    public String badTimeZone() {
+        return properties.getProperty("timezone.bad");
+    }
+
+    public String howToName(String userName) {
+        return properties.getProperty("register.how-to-name");
+    }
+
+    public List<Object> wrongTimeFormat(Object form1, Object form2, Object form3) {
         List<Object> list = new ArrayList<>();
-        list.add(String.format(properties.getProperty("greet.one"), name));
-        list.add(properties.getProperty("greet.two"));
-        list.add(StickerCollector.smile);
+        list.add(properties.getProperty("timer.fail.one"));
+        list.add(StickerCollector.feelsBad);
+        list.add(String.format(properties.getProperty("timer.format"), form1, form2, form3));
         return list;
+    }
+
+    public List<String> getTimerTime(Object form1, Object form2, Object form3) {
+        List<String> list = new ArrayList<>();
+        list.add(properties.getProperty("timer.get-time"));
+        list.add(String.format(properties.getProperty("timer.format"), form1, form2, form3));
+        return list;
+    }
+
+    public String getTimerMsg() {
+        return properties.getProperty("timer.get-msg");
     }
 
     public List<Object> getSuccessTimedPhrase() {
@@ -44,14 +59,16 @@ public class PhraseUtil {
         return list;
     }
 
-    public List<Object> getFailedTimedPhrase(Object form1, Object form2, Object form3) {
-        List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("timer.fail.one"));
-        list.add(StickerCollector.feelsBad);
-        list.add(String.format(properties.getProperty("timer.fail.two"), form1, form2, form3));
-        list.add(properties.getProperty("timer.fail.three"));
-        return list;
+    public String emptyTimeZone(){
+        return properties.getProperty("timezone.empty");
+    }
 
+    public String timeZoneExist(String time){
+        return String.format(properties.getProperty("timezone.exist"), time);
+    }
+
+    public String setTimeZone(){
+        return properties.getProperty("timezone.time");
     }
 
     public List<Object> registered(Object name){
@@ -60,6 +77,14 @@ public class PhraseUtil {
         list.add(StickerCollector.nice);
         return list;
     }
+
+    public List<Object> emptyName() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("register.empty.name"));
+        list.add(StickerCollector.oops);
+        return list;
+    }
+
 
     public List<Object> getInfoPhrase(User user) {
         List<Object> list = new ArrayList<>();
@@ -86,13 +111,6 @@ public class PhraseUtil {
         return list;
     }
 
-    public List<Object> emptyName() {
-        List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("register.empty.name"));
-        list.add(StickerCollector.oops);
-        return list;
-    }
-
     public List<Object> notifyNo(){
         List<Object> list = new ArrayList<>();
         list.add(properties.getProperty("notify.no"));
@@ -107,6 +125,29 @@ public class PhraseUtil {
         return list;
     }
 
+    public String howToNotify() {
+        return properties.getProperty("notify.disclaimer");
+    }
+
+    public String getNotifyHelp(String onOrOffString) {
+        return String.format(properties.getProperty("notify.help"), onOrOffString);
+    }
+
+    public String askToStartNotify() {
+        return properties.getProperty("notify.ask.start");
+    }
+
+    public Object askToStopNotify() {
+        return properties.getProperty("notify.ask.stop");
+    }
+
+    public List<Object> notifyNoChanges() {
+        List<Object> list = new ArrayList<>();
+        list.add(properties.getProperty("notify.no-changes"));
+        list.add(StickerCollector.pleased);
+        return list;
+    }
+
     public List<Object> ok(){
         List<Object> list = new ArrayList<>();
         list.add(properties.getProperty("common.ok"));
@@ -115,22 +156,5 @@ public class PhraseUtil {
     }
 
 
-    public String howToNotify() {
-        return properties.getProperty("notify.disclaimer");
-    }
 
-    public String getNotifyHelp() {
-        return properties.getProperty("notify.help");
-    }
-
-    public List<Object> timeZoneEmpty() {
-        List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("timer.timezone.empty"));
-        list.add(StickerCollector.pleased);
-        return list;
-    }
-
-    public String badTimeZone() {
-        return properties.getProperty("timer.timezone.bad");
-    }
 }

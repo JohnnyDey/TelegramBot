@@ -18,6 +18,7 @@ public class TimersCommand extends CommonCommand implements Command{
             timersService.stopTimers();
             phrases.add("Stopped All timers");
         }
+        stop();
         return phrases;
     }
 }

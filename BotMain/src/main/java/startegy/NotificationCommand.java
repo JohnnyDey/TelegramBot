@@ -8,19 +8,44 @@ public class NotificationCommand extends CommonCommand implements Command {
 
     @Override
     public List<Object> execute(String message, User user) {
-
-        User userByAppId = userServiceImp.getUserByAppId(user.getAppId(), user.getAppType());
-        if(message.endsWith("no")){
-            userByAppId.setNotify(false);
-            phrases = phraseUtil.notifyNo();
-        } else if(message.endsWith("yes")){
-            userByAppId.setNotify(true);
-            phrases = phraseUtil.notifyYes();
+        if (user.isNotify()){
+            phrases.add(phraseUtil.askToStopNotify());
         } else {
-            phrases.add(phraseUtil.getNotifyHelp());
-            return phrases;
+            phrases.add(phraseUtil.askToStartNotify());
         }
-        userServiceImp.saveUser(userByAppId);
         return phrases;
+    }
+
+    @Override
+    public List<Object> nextPhase(String message, User user) {
+        if(message.toLowerCase().startsWith("нет")){
+            phrases.addAll(phraseUtil.notifyNoChanges());
+            stop();
+        } else if(message.toLowerCase().startsWith("да")){
+            if(user.isNotify()){
+                phrases = phraseUtil.notifyNo();
+            } else {
+                phrases = phraseUtil.notifyYes();
+            }
+            changeSub(user);
+            stop();
+        } else {
+            if(user.isNotify()){
+                phrases.add(phraseUtil.getNotifyHelp("выключить"));
+            }else {
+                phrases.add(phraseUtil.getNotifyHelp("включить"));
+            }
+
+        }
+        return phrases;
+    }
+
+    private void changeSub(User user){
+        if(user.isNotify()){
+            user.setNotify(false);
+        } else {
+            user.setNotify(true);
+        }
+        userServiceImp.saveUser(user);
     }
 }

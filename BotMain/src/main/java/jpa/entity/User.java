@@ -1,6 +1,9 @@
 package jpa.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class User {
@@ -21,6 +24,9 @@ public class User {
 
     @Column
     private boolean notify;
+
+    @Column
+    private String timeZone;
 
     public Long getAppId() {
         return appId;
@@ -60,6 +66,14 @@ public class User {
 
     public void setAppType(String appType) {
         this.appType = appType;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 
     public enum AppType{

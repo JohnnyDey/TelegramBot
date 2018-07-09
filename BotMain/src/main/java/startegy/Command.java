@@ -17,4 +17,12 @@ public interface Command {
     void setTimersService(TimersService timersService);
 
     void setPhraseUtil(PhraseUtil phraseUtil);
+
+    boolean isStopped();
+
+    void stop();
+
+    List<Object> nextPhase(String message, User user);
+
+    void clearPhases();
 }

@@ -13,11 +13,13 @@ public class NotifyAllCommand extends CommonCommand implements Command {
 
     @Override
     public List<Object> execute(String message, User user) {
+        message = message.replace("/notifyEveryOne", "").trim();
         NotifyAll notifyAll = new NotifyAll();
         notifyAll.setUsersToNotify(userServiceImp.getAllUsersToNotify());
         notifyAll.setMsg(message);
         notifyAll.setDisclaimer(phraseUtil.howToNotify());
         ((Event<NotifyAll>) args.get(EVENT)).fire(notifyAll);
+        stop();
         return Collections.emptyList();
     }
 }

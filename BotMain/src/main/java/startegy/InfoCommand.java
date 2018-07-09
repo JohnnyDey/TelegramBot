@@ -11,6 +11,7 @@ public class InfoCommand extends CommonCommand implements Command {
     @Override
     public List<Object> execute(String message, User user) {
         phrases.addAll(phraseUtil.getInfoPhrase(user));
+        stop();
         return phrases;
     }
 }
