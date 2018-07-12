@@ -1,4 +1,4 @@
-package startegy;
+package command;
 
 import jpa.entity.User;
 
@@ -13,11 +13,11 @@ public class TimeZoneCommand extends CommonCommand implements Command{
     public List<Object> execute(String message, User user) {
         if(user.getTimeZone() != null){
             LocalTime now = LocalTime.now(ZoneOffset.of(user.getTimeZone()));
-            phrases.add(phraseUtil.timeZoneExist(getFormattedTime(now)));
+            putPhase(phraseUtil.timeZoneExist(getFormattedTime(now)));
         } else {
-            phrases.add(phraseUtil.emptyTimeZone());
+            putPhase(phraseUtil.emptyTimeZone());
         }
-        return phrases;
+        return completeExecution();
     }
 
     private String getFormattedTime(LocalTime time){
@@ -43,20 +43,20 @@ public class TimeZoneCommand extends CommonCommand implements Command{
             int hour = Integer.parseInt(message.substring(0, delimiter));
             int min = Integer.parseInt(message.substring(delimiter + 1));
             if(hour > 23 || hour < 0 || min < 0 || min > 59){
-                phrases.add(phraseUtil.badTimeZone());
+                putPhase(phraseUtil.badTimeZone());
             } else {
                 hour -= now.getHour();
                 min -= now.getMinute();
                 ZoneOffset zoneOffset = getOffset(hour, min);
                 user.setTimeZone(zoneOffset.getId());
                 userServiceImp.saveUser(user);
-                phrases.addAll(phraseUtil.ok());
-                stop();
+                putPhases(phraseUtil.ok());
+                return finishExecution();
             }
         } catch (Exception e){
-            phrases.add(phraseUtil.badTimeZone());
+            putPhase(phraseUtil.badTimeZone());
         }
-        return phrases;
+        return completeExecution();
     }
     //разбораться с оффсетом в -12:30 и +12:30
     private ZoneOffset getOffset(int hour, int min){

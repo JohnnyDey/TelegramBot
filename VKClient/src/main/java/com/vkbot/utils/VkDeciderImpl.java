@@ -4,9 +4,12 @@ import com.petersamokhin.bots.sdk.objects.Message;
 import jpa.entity.User;
 import utils.PhraseDecider;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class VkDeciderImpl extends PhraseDecider implements VkDecider{
+
+
+public class VkDeciderImpl extends PhraseDecider implements VkDecider, Serializable {
 
     public List<Object> onText(Message message){
         User user = userServiceImp.getUserByAppId(Long.valueOf(message.authorId()), User.AppType.VK.name());

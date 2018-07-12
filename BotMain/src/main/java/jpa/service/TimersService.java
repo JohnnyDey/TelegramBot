@@ -7,13 +7,14 @@ import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class TimersService {
+public class TimersService implements Serializable {
 
     @Resource
     private TimerService timerService;

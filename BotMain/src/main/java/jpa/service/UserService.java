@@ -3,9 +3,10 @@ package jpa.service;
 
 import jpa.entity.User;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends Serializable {
 
     List<User> getAllUsers();
 

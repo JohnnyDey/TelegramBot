@@ -1,4 +1,4 @@
-package startegy;
+package command;
 
 import jpa.entity.User;
 
@@ -9,35 +9,35 @@ public class NotificationCommand extends CommonCommand implements Command {
     @Override
     public List<Object> execute(String message, User user) {
         if (user.isNotify()){
-            phrases.add(phraseUtil.askToStopNotify());
+            putPhase(phraseUtil.askToStopNotify());
         } else {
-            phrases.add(phraseUtil.askToStartNotify());
+            putPhase(phraseUtil.askToStartNotify());
         }
-        return phrases;
+        return completeExecution();
     }
 
     @Override
     public List<Object> nextPhase(String message, User user) {
         if(message.toLowerCase().startsWith("нет")){
-            phrases.addAll(phraseUtil.notifyNoChanges());
-            stop();
+            putPhases(phraseUtil.notifyNoChanges());
+            return finishExecution();
         } else if(message.toLowerCase().startsWith("да")){
             if(user.isNotify()){
-                phrases = phraseUtil.notifyNo();
+                putPhases(phraseUtil.notifyNo());
             } else {
-                phrases = phraseUtil.notifyYes();
+                putPhases(phraseUtil.notifyYes());
             }
             changeSub(user);
-            stop();
+            return finishExecution();
         } else {
             if(user.isNotify()){
-                phrases.add(phraseUtil.getNotifyHelp("выключить"));
+                putPhase(phraseUtil.getNotifyHelp("выключить"));
             }else {
-                phrases.add(phraseUtil.getNotifyHelp("включить"));
+                putPhase(phraseUtil.getNotifyHelp("включить"));
             }
 
         }
-        return phrases;
+        return completeExecution();
     }
 
     private void changeSub(User user){

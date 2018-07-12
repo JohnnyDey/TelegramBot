@@ -1,15 +1,16 @@
-package startegy;
+package command;
 
 import action.NotifyAll;
 import jpa.entity.User;
 
 import javax.enterprise.event.Event;
-import java.util.Collections;
+import javax.inject.Inject;
 import java.util.List;
 
 public class NotifyAllCommand extends CommonCommand implements Command {
 
-    public static final String EVENT = "event";
+    @Inject
+    private Event<NotifyAll> notifyAllEvent;
 
     @Override
     public List<Object> execute(String message, User user) {
@@ -18,8 +19,7 @@ public class NotifyAllCommand extends CommonCommand implements Command {
         notifyAll.setUsersToNotify(userServiceImp.getAllUsersToNotify());
         notifyAll.setMsg(message);
         notifyAll.setDisclaimer(phraseUtil.howToNotify());
-        ((Event<NotifyAll>) args.get(EVENT)).fire(notifyAll);
-        stop();
-        return Collections.emptyList();
+        notifyAllEvent.fire(notifyAll);
+        return finishExecution();
     }
 }

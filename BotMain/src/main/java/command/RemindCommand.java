@@ -1,4 +1,4 @@
-package startegy;
+package command;
 
 import jpa.entity.User;
 
@@ -21,20 +21,18 @@ public class RemindCommand extends CommonCommand implements Command {
     @Override
     public List<Object> execute(String message, User user) {
         if(user.getTimeZone() == null){
-            phrases.addAll(phraseUtil.timeZoneEmpty());
-            return phrases;
-        } else {
-            phrases.addAll(phraseUtil.getTimerTime(form.replaceAll("[.]", "/"), form, form.replaceAll("[.]", "-")));
+            putPhases(phraseUtil.timeZoneEmpty());
+            return finishExecution();
         }
-        phrases.addAll(phraseUtil.getTimerTime(form.replaceAll("[.]", "/"), form, form.replaceAll("[.]", "-")));
-        return phrases;
+        putPhases(phraseUtil.getTimerTime(form.replaceAll("[.]", "/"), form, form.replaceAll("[.]", "-")));
+        return completeExecution();
     }
 
     @Override
     public List<Object> nextPhase(String message, User user) {
-          if(localDateTime == null){
+        if(localDateTime == null){
             try {
-                phrases.add(phraseUtil.getTimerMsg());
+                putPhase(phraseUtil.getTimerMsg());
                 localDateTime = LocalDateTime.parse(message, formatter1);
             } catch (DateTimeParseException e) {
                 try {
@@ -49,13 +47,13 @@ public class RemindCommand extends CommonCommand implements Command {
             }
         } else {
             startTimer(message, user);
-            phrases.addAll(phraseUtil.getSuccessTimedPhrase());
+            putPhases(phraseUtil.getSuccessTimedPhrase());
+            return finishExecution();
         }
-        return phrases;
+        return completeExecution();
     }
 
     private void startTimer(String msg, User user){
-        stop();
         timersService.startTimer(zonedDateToDate(localDateTime, String.valueOf(user.getTimeZone())), user.getAppId(), msg);
     }
 

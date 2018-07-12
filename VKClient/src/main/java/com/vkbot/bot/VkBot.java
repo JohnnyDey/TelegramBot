@@ -10,11 +10,24 @@ import jpa.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.List;
 
-public class VkBot extends Group {
+public class VkBot extends Group implements Serializable {
+
+    @PostConstruct
+    public void post(){
+        logger.info("VK bot created");
+    }
+
+    @PreDestroy
+    public void pre(){
+        logger.info("VK bot deleted");
+    }
 
     private Logger logger = LoggerFactory.getLogger(VkBot.class);
 
@@ -23,14 +36,6 @@ public class VkBot extends Group {
 
     public VkBot(){
         super("a3b65d21a8272a23e53b7232f780bd15c0eb773608b2805a1242c2b05dfefb23bb2c5a3e7b2cca09a37e4");
-    }
-
-    public VkBot(Integer id, String access_token) {
-        super(id, access_token);
-    }
-
-    VkBot(String access_token) {
-        super(access_token);
     }
 
     void setHandler(){
