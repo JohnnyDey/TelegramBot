@@ -6,12 +6,11 @@ import jpa.service.UserService;
 import utils.PhraseUtil;
 
 import javax.inject.Inject;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CommonCommand implements Serializable {
+public abstract class AbstractCommand implements Command {
 
     @Inject
     transient UserService userServiceImp;
@@ -22,8 +21,7 @@ public class CommonCommand implements Serializable {
     @Inject
     transient PhraseUtil phraseUtil;
 
-    protected CommonCommand() {
-    }
+    AbstractCommand() {}
 
     List<Object> completeExecution(){
         status = Status.MANAGED;
@@ -35,11 +33,14 @@ public class CommonCommand implements Serializable {
         return phrases;
     }
 
+    @Override
+    public abstract List<Object> execute(String message, User user);
+
     public void interrupt(){
         status = Status.STOPPED;
     }
 
-    private List<Object> phrases = new ArrayList<>();
+    private final List<Object> phrases = new ArrayList<>();
 
     void putPhase(Object o){
         phrases.add(o);

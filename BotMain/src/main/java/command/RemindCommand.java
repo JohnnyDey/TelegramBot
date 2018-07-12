@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 
-public class RemindCommand extends CommonCommand implements Command {
+public class RemindCommand extends AbstractCommand {
 
     private static final String form = "dd.MM.yyyy HH:mm";
     private static final DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(form.replaceAll("[.]", "/"));

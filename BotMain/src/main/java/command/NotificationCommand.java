@@ -4,7 +4,7 @@ import jpa.entity.User;
 
 import java.util.List;
 
-public class NotificationCommand extends CommonCommand implements Command {
+public class NotificationCommand extends AbstractCommand {
 
     @Override
     public List<Object> execute(String message, User user) {

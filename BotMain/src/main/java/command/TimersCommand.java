@@ -4,7 +4,7 @@ import jpa.entity.User;
 
 import java.util.List;
 
-public class TimersCommand extends CommonCommand implements Command{
+public class TimersCommand extends AbstractCommand {
     @Override
     public List<Object> execute(String message, User user) {
         if(message.endsWith("Get")){

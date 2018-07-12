@@ -13,7 +13,7 @@ import javax.inject.Inject;
 @Singleton
 public class VkInitializer {
 
-    private Logger logger = LoggerFactory.getLogger(VkInitializer.class);
+    private final Logger logger = LoggerFactory.getLogger(VkInitializer.class);
 
     @Inject
     private VkBot bot;

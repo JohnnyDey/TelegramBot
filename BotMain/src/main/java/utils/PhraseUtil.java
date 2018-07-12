@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class PhraseUtil implements Serializable {
 
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     public PhraseUtil() throws IOException {
         InputStream resourceAsStream = PhraseUtil.class.getClassLoader().getResourceAsStream("core/phrases.properties");

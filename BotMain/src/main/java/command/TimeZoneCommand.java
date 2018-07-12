@@ -8,7 +8,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.List;
 
-public class TimeZoneCommand extends CommonCommand implements Command{
+public class TimeZoneCommand extends AbstractCommand {
     @Override
     public List<Object> execute(String message, User user) {
         if(user.getTimeZone() != null){

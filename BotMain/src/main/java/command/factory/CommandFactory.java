@@ -21,13 +21,13 @@ public class CommandFactory {
 
     private UserId user;
 
-    private Map<UserId, Command> sessions = new ConcurrentHashMap<>();
+    private final Map<UserId, Command> sessions = new ConcurrentHashMap<>();
 
     @Produces
     @Named(value = "execCommand")
     public Command getCommand(){
         Command command = sessions.computeIfAbsent(user, s -> getNewCommand());
-        if(command.getStatus().equals(CommonCommand.Status.STOPPED)){
+        if(command.getStatus().equals(AbstractCommand.Status.STOPPED)){
             command = getNewCommand();
             sessions.put(user, command);
         }

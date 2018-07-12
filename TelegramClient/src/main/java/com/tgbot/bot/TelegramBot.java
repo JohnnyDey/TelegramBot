@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TelegramBot extends TelegramLongPollingBot{
 
-    private Logger logger = LoggerFactory.getLogger(TelegramBot.class);
+    private final Logger logger = LoggerFactory.getLogger(TelegramBot.class);
 
     @Inject
     private TgDecider decider;

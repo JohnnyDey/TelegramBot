@@ -15,7 +15,7 @@ import java.util.List;
 
 public abstract class PhraseDecider {
 
-    private Logger logger = LoggerFactory.getLogger(PhraseDecider.class);
+    private final Logger logger = LoggerFactory.getLogger(PhraseDecider.class);
 
     @Inject
     transient protected UserService userServiceImp;
@@ -32,7 +32,7 @@ public abstract class PhraseDecider {
         setPropertiesForCommand(message, user);
 
         Command command = commandInstance.get();
-        if(command.getStatus().equals(CommonCommand.Status.NEW)){
+        if(command.getStatus().equals(AbstractCommand.Status.NEW)){
             return command.execute(message.trim(), user);
         }else {
             if(message.startsWith("/cancel")){

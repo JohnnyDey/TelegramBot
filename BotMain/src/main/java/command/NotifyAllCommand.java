@@ -7,7 +7,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.util.List;
 
-public class NotifyAllCommand extends CommonCommand implements Command {
+public class NotifyAllCommand extends AbstractCommand {
 
     @Inject
     private Event<NotifyAll> notifyAllEvent;

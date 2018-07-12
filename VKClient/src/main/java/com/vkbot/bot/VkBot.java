@@ -29,7 +29,7 @@ public class VkBot extends Group implements Serializable {
         logger.info("VK bot deleted");
     }
 
-    private Logger logger = LoggerFactory.getLogger(VkBot.class);
+    private final Logger logger = LoggerFactory.getLogger(VkBot.class);
 
     @Inject
     private VkDecider decider;

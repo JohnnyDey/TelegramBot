@@ -4,7 +4,7 @@ import jpa.entity.User;
 
 import java.util.List;
 
-public class InfoCommand extends CommonCommand implements Command {
+public class InfoCommand extends AbstractCommand {
 
 
     @Override

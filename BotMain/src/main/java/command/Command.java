@@ -10,7 +10,7 @@ public interface Command {
 
     void interrupt();
 
-    CommonCommand.Status getStatus();
+    AbstractCommand.Status getStatus();
 
     List<Object> nextPhase(String message, User user);
 

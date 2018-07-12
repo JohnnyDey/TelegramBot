@@ -14,7 +14,7 @@ import javax.ejb.Startup;
 @Singleton
 public class Initializer {
 
-    private Logger logger = LoggerFactory.getLogger(Initializer.class);
+    private final Logger logger = LoggerFactory.getLogger(Initializer.class);
 
     @PostConstruct
     private void start(){
