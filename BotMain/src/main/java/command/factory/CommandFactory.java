@@ -37,19 +37,17 @@ public class CommandFactory {
     private Command getNewCommand(){
         if(message.startsWith("/timers")){
             return commandInstance.select(TimersCommand.class).get();
-        } else if (message.equalsIgnoreCase("/spam")){
+        } else if (message.equalsIgnoreCase("/спам")){
             return commandInstance.select(NotificationCommand.class).get();
-        } else if(message.equalsIgnoreCase("/remind")){
+        } else if(message.equalsIgnoreCase("/напомни")){
             return commandInstance.select(RemindCommand.class).get();
-        } else if(message.equalsIgnoreCase("/help")) {
+        } else if(message.equalsIgnoreCase("/помощь")) {
             return commandInstance.select(HelpCommand.class).get();
-        } else if(message.equalsIgnoreCase("/register")){
-            return commandInstance.select(RegisterCommand.class).get();
-        } else if(message.equalsIgnoreCase("/info")) {
+        } else if(message.equalsIgnoreCase("/инфо")) {
             return commandInstance.select(InfoCommand.class).get();
-        } else if(message.equalsIgnoreCase("/notifyEveryOne")){
+        } else if(message.startsWith("/сказатьВслух") && user.getAppId().equals(40092345L)){
             return commandInstance.select(NotifyAllCommand.class).get();
-        } else if(message.equalsIgnoreCase("/timezone")){
+        } else if(message.equalsIgnoreCase("/таймзона")){
             return commandInstance.select(TimeZoneCommand.class).get();
         } else {
             return commandInstance.select(HelpCommand.class).get();

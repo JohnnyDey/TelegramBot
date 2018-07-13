@@ -21,7 +21,7 @@ public class VkInitializer {
     @PostConstruct
     private void start(){
         logger.info("VK starting");
-        bot.setHandler();
+        bot.startBot();
         logger.info("VK started");
     }
 }

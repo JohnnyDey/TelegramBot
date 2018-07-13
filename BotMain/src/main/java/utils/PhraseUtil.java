@@ -72,20 +72,6 @@ public class PhraseUtil implements Serializable {
         return properties.getProperty("timezone.time");
     }
 
-    public List<Object> registered(Object name){
-        List<Object> list = new ArrayList<>();
-        list.add(String.format(properties.getProperty("register.ok"), name));
-        list.add(StickerCollector.nice);
-        return list;
-    }
-
-    public List<Object> emptyName() {
-        List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("register.empty.name"));
-        list.add(StickerCollector.oops);
-        return list;
-    }
-
 
     public List<Object> getInfoPhrase(User user) {
         List<Object> list = new ArrayList<>();
@@ -93,15 +79,8 @@ public class PhraseUtil implements Serializable {
         if(user.getUserName() != null) {
             sb.append(String.format(properties.getProperty("info.name"), user.getUserName())).append("\n");
         }
-        if(sb.length() == 0){
-            list.add(properties.getProperty("info.unknown.one"));
-            list.add(StickerCollector.anonymous);
-            list.add(properties.getProperty("info.unknown.two"));
-            list.add(properties.getProperty("info.unknown.three"));
-        } else {
-            list.add(sb.toString());
-            list.add(StickerCollector.glad);
-        }
+        list.add(sb.toString());
+        list.add(StickerCollector.glad);
         return list;
     }
 
@@ -155,7 +134,5 @@ public class PhraseUtil implements Serializable {
         list.add(StickerCollector.thumbUp);
         return list;
     }
-
-
 
 }

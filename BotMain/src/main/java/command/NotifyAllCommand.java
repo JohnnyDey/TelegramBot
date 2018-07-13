@@ -14,7 +14,11 @@ public class NotifyAllCommand extends AbstractCommand {
 
     @Override
     public List<Object> execute(String message, User user) {
-        message = message.replace("/notifyEveryOne", "").trim();
+        return completeExecution();
+    }
+
+    @Override
+    public List<Object> nextPhase(String message, User user) {
         NotifyAll notifyAll = new NotifyAll();
         notifyAll.setUsersToNotify(userServiceImp.getAllUsersToNotify());
         notifyAll.setMsg(message);

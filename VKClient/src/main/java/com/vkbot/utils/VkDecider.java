@@ -1,6 +1,6 @@
 package com.vkbot.utils;
 
-import com.petersamokhin.bots.sdk.objects.Message;
+import com.vkbot.vk.api.Message;
 
 import java.util.List;
 

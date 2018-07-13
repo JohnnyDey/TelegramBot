@@ -2,9 +2,11 @@ package com.vkbot.bot;
 
 import action.NotifyAll;
 import action.TimerRemind;
-import com.petersamokhin.bots.sdk.clients.Group;
-import com.petersamokhin.bots.sdk.objects.Message;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
 import com.vkbot.utils.VkDecider;
+import com.vkbot.vk.api.Group;
+import com.vkbot.vk.api.Message;
 import jpa.entity.TimerId;
 import jpa.entity.User;
 import org.slf4j.Logger;
@@ -14,10 +16,63 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import java.io.Serializable;
 import java.util.List;
 
-public class VkBot extends Group implements Serializable {
+public class VkBot extends Group {
+
+    private final Logger logger = LoggerFactory.getLogger(VkBot.class);
+
+    @Inject
+    private VkDecider decider;
+
+    @Override
+    protected void simpleTextMessageHandle(Message message) {
+        List<Object> strings = decider.onText(message);
+        strings.forEach(o -> {
+            if(o instanceof String){
+                sendMessage(String.valueOf(o), message.getFromId());
+            } else if(o instanceof Integer){
+                sendSticker((Integer) o, message.getFromId());
+            }
+
+        });
+    }
+
+    @Override
+    protected void stickerHandle(Message message) {
+
+    }
+
+    @Override
+    protected void voiceMessageHandle(Message message) {
+//        new Message().from(this).to(message.authorId()).sendVoiceMessage("/home/aleksey/Downloads/1.mp3");
+    }
+
+
+    private void sendMessage(String message, Integer id){
+        try {
+            apiClient.messages()
+                    .send(groupActor)
+                    .userId(id)
+                    .message(message)
+                    .execute();
+        } catch (ApiException | ClientException e) {
+            logger.error("Exception while sending msg: ", e.getMessage());
+        }
+    }
+
+    private void sendSticker(Integer stickerId, Integer id){
+        try {
+            apiClient.messages()
+                    .send(groupActor)
+                    .stickerId(stickerId)
+                    .userId(id)
+                    .execute();
+        } catch (ApiException | ClientException e) {
+            logger.error("Exception while sending sticker: ", e.getMessage());
+        }
+    }
+
 
     @PostConstruct
     public void post(){
@@ -29,40 +84,17 @@ public class VkBot extends Group implements Serializable {
         logger.info("VK bot deleted");
     }
 
-    private final Logger logger = LoggerFactory.getLogger(VkBot.class);
-
-    @Inject
-    private VkDecider decider;
-
-    public VkBot(){
-        super("a3b65d21a8272a23e53b7232f780bd15c0eb773608b2805a1242c2b05dfefb23bb2c5a3e7b2cca09a37e4");
-    }
-
-    void setHandler(){
-        this.onSimpleTextMessage(message ->{
-            List<Object> strings = decider.onText(message);
-            strings.forEach(o -> {
-                if(o instanceof String){
-                    new Message().from(this).to(message.authorId()).text(o).send();
-                } else if(o instanceof Integer){
-                    new Message().from(this).to(message.authorId()).sticker((Integer)o).send();
-                }
-
-            });
-        });
-    }
-
     public void timeout(@Observes TimerRemind timerRemind){
         TimerId id = timerRemind.getId();
         logger.info("Send msg: " + id);
-        new Message().from(this).to(Math.toIntExact(id.getId())).text(id.getMsg()).send();
+        sendMessage(id.getMsg(), Math.toIntExact(id.getId()));
     }
 
     public void notify(@Observes NotifyAll notifyAll){
         for(User user : notifyAll.getUsersToNotify()){
             if(user.getAppType().equals(User.AppType.VK.name())){
-                new Message().from(this).to(Math.toIntExact(user.getAppId())).text(notifyAll.getMsg()).send();
-                new Message().from(this).to(Math.toIntExact(user.getAppId())).text(notifyAll.getDisclaimer()).send();
+                sendMessage(notifyAll.getMsg(), Math.toIntExact(user.getAppId()));
+                sendMessage(notifyAll.getDisclaimer(), Math.toIntExact(user.getAppId()));
             }
         }
     }

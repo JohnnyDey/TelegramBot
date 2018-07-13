@@ -13,13 +13,13 @@ import java.util.List;
 public abstract class AbstractCommand implements Command {
 
     @Inject
-    transient UserService userServiceImp;
+    UserService userServiceImp;
 
     @Inject
-    transient TimersService timersService;
+    TimersService timersService;
 
     @Inject
-    transient PhraseUtil phraseUtil;
+    PhraseUtil phraseUtil;
 
     AbstractCommand() {}
 
