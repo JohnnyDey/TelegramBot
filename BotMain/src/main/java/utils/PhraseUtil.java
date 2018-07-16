@@ -1,14 +1,14 @@
 package utils;
 
+import jpa.entity.TimerId;
 import jpa.entity.User;
 
+import javax.ejb.Timer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class PhraseUtil implements Serializable {
 
@@ -19,37 +19,15 @@ public class PhraseUtil implements Serializable {
         properties.load(new InputStreamReader(resourceAsStream));
     }
 
-    public List<Object> timeZoneEmpty() {
+    public List<Object> getTimerTime() {
         List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("timer.timezone.empty"));
-        list.add(KeyboardMap.LIST);
-        list.add(StickerCollector.pleased);
-        return list;
-    }
-
-    public String badTimeZone() {
-        return properties.getProperty("timezone.bad");
-    }
-
-    public List<Object> wrongTimeFormat(Object form1, Object form2, Object form3) {
-        List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("timer.fail.one"));
-        list.add(StickerCollector.feelsBad);
-        list.add(String.format(properties.getProperty("timer.format"), form1, form2, form3));
-        return list;
-    }
-
-    public List<Object> getTimerTime(Object form1, Object form2, Object form3) {
-        List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("timer.get-time"));
         list.add(KeyboardMap.SET_TIME);
-        list.add(String.format(properties.getProperty("timer.format"), form1, form2, form3));
+        list.add(properties.getProperty("timer.get-time"));
         return list;
     }
 
     public List<Object> getTimerMsg() {
         List<Object> list = new ArrayList<>();
-        list.add(properties.getProperty("timer.get-time"));
         list.add(KeyboardMap.CANCEL);
         list.add(properties.getProperty("timer.get-msg"));
         return list;
@@ -62,21 +40,6 @@ public class PhraseUtil implements Serializable {
         list.add(StickerCollector.thumbUp);
         return list;
     }
-
-    public List<Object> emptyTimeZone(){
-        List<Object> list = new ArrayList<>();
-        list.add(KeyboardMap.SET_TIME);
-        list.add(properties.getProperty("timezone.empty"));
-        return list;
-    }
-
-    public List<Object> timeZoneExist(String time){
-        List<Object> list = new ArrayList<>();
-        list.add(KeyboardMap.SET_TIME);
-        list.add(String.format(properties.getProperty("timezone.exist"), time));
-        return list;
-    }
-
 
     public List<Object> getInfoPhrase(User user) {
         List<Object> list = new ArrayList<>();
@@ -155,4 +118,37 @@ public class PhraseUtil implements Serializable {
         return list;
     }
 
+    public List<Object> toBigInteger(){
+        List<Object> list = new ArrayList<>();
+        list.add(KeyboardMap.CANCEL);
+        list.add(properties.getProperty("timers.out-of-bounds"));
+
+        return list;
+    }
+
+    public List<Object> noTimers(){
+        List<Object> list = new ArrayList<>();
+        list.add(KeyboardMap.LIST);
+        list.add(properties.getProperty("timers.list.empty"));
+        return list;
+    }
+
+    public List<Object> timersList(List<Timer> timers){
+        List<Object> list = new ArrayList<>();
+        list.add(KeyboardMap.CANCEL);
+        StringBuilder sb = new StringBuilder(properties.getProperty("timers.list"));
+        for(int i = 1; i <= timers.size(); i++){
+            sb.append(formatDate(i, timers.get(i - 1)));
+        }
+        list.add(sb.toString());
+        return list;
+    }
+
+    private String formatDate(int index, Timer t){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(t.getNextTimeout());
+        return "\n" + index + ". " + calendar.get(Calendar.DAY_OF_MONTH) + "-" + String.valueOf(calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.YEAR) +
+                " " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE) +
+                " Текст: " + ((TimerId) t.getInfo()).getMsg();
+    }
 }

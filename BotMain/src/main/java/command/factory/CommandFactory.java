@@ -14,6 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @ApplicationScoped
 public class CommandFactory {
 
+    public static final String INFO = "Информация";
+    public static final String SPAM = "Спам";
+    public static final String REMIND = "Напомнить";
+    public static final String MY_REMINDS = "Мои напоминалки";
+    public static final String CANCEL = "Хватит";
+
     @Inject
     private Instance<Command> commandInstance;
 
@@ -37,18 +43,16 @@ public class CommandFactory {
     private Command getNewCommand(){
         if(message.startsWith("/timers")){
             return commandInstance.select(TimersCommand.class).get();
-        } else if (message.equalsIgnoreCase("/спам")){
+        } else if (message.equals(SPAM)){
             return commandInstance.select(NotificationCommand.class).get();
-        } else if(message.equalsIgnoreCase("/напомни")){
+        } else if(message.equals(REMIND)){
             return commandInstance.select(RemindCommand.class).get();
-        } else if(message.equalsIgnoreCase("/помощь")) {
-            return commandInstance.select(HelpCommand.class).get();
-        } else if(message.equalsIgnoreCase("/инфо")) {
+        } else if(message.equals(INFO)) {
             return commandInstance.select(InfoCommand.class).get();
         } else if(message.startsWith("/сказатьВслух") && user.getAppId().equals(40092345L)){
             return commandInstance.select(NotifyAllCommand.class).get();
-        } else if(message.equalsIgnoreCase("/таймзона")){
-            return commandInstance.select(TimeZoneCommand.class).get();
+        } else if(message.equals(MY_REMINDS)){
+            return commandInstance.select(MyReminds.class).get();
         } else {
             return commandInstance.select(HelpCommand.class).get();
         }

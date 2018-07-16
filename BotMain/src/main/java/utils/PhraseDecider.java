@@ -35,7 +35,7 @@ public abstract class PhraseDecider {
         if(command.getStatus().equals(AbstractCommand.Status.NEW)){
             return command.execute(message.trim(), user);
         }else {
-            if(message.startsWith("/хватит")){
+            if(message.startsWith(CommandFactory.CANCEL)){
                 command.interrupt();
                 return commandInstance.get().execute(message, user);
             } else {

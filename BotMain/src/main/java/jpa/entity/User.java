@@ -25,8 +25,6 @@ public class User {
     @Column
     private boolean notify;
 
-    @Column
-    private String timeZone;
 
     public Long getAppId() {
         return appId;
@@ -66,14 +64,6 @@ public class User {
 
     public void setAppType(String appType) {
         this.appType = appType;
-    }
-
-    public String getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
     }
 
     public enum AppType{

@@ -19,11 +19,13 @@ import utils.KeyboardMap;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
 
+@ApplicationScoped
 public class VkBot extends Group {
 
     private final Logger logger = LoggerFactory.getLogger(VkBot.class);

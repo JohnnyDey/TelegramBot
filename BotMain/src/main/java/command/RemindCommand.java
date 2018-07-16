@@ -2,49 +2,27 @@ package command;
 
 import jpa.entity.User;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class RemindCommand extends AbstractCommand {
 
-    private static final String form = "dd.MM.yyyy HH:mm";
-    private static final DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(form.replaceAll("[.]", "/"));
-    private static final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern(form);
-    private static final DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern(form.replaceAll("[.]", "-"));
-
-    private LocalDateTime localDateTime;
+    private ZonedDateTime zonedDateTime;
 
     @Override
     public List<Object> execute(String message, User user) {
-        if(user.getTimeZone() == null){
-            putPhases(phraseUtil.timeZoneEmpty());
-            return finishExecution();
-        }
-        putPhases(phraseUtil.getTimerTime(form.replaceAll("[.]", "/"), form, form.replaceAll("[.]", "-")));
+        putPhases(phraseUtil.getTimerTime());
         return completeExecution();
     }
 
     @Override
     public List<Object> nextPhase(String message, User user) {
-        if(localDateTime == null){
-            try {
-                putPhase(phraseUtil.getTimerMsg());
-                localDateTime = LocalDateTime.parse(message, formatter1);
-            } catch (DateTimeParseException e) {
-                try {
-                    localDateTime = LocalDateTime.parse(message, formatter2);
-                } catch (DateTimeParseException e1) {
-                    try {
-                        localDateTime = LocalDateTime.parse(message, formatter3);
-                    } catch (DateTimeParseException e2) {
-                        return phraseUtil.wrongTimeFormat(form.replaceAll("[.]", "/"), form, form.replaceAll("[.]", "-"));
-                    }
-                }
-            }
+        if(zonedDateTime == null){
+            zonedDateTime = parseDate(message);
+            putPhases(phraseUtil.getTimerMsg());
         } else {
             startTimer(message, user);
             putPhases(phraseUtil.getSuccessTimedPhrase());
@@ -53,11 +31,41 @@ public class RemindCommand extends AbstractCommand {
         return completeExecution();
     }
 
-    private void startTimer(String msg, User user){
-        timersService.startTimer(zonedDateToDate(localDateTime, String.valueOf(user.getTimeZone())), user.getAppId(), msg);
+    private ZonedDateTime parseDate(String message) {
+
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
+        switch (message){
+            case "5 минут":
+                return now.plusMinutes(5);
+            case "10 минут":
+                return now.plusMinutes(10);
+            case "30 минут":
+                return now.plusMinutes(30);
+            case "Час":
+                return now.plusHours(1);
+            case "Два час":
+                return now.plusHours(2);
+            case "6 часов":
+                return now.plusHours(1);
+            case "12 часов":
+                return now.plusHours(12);
+            case "Сутки":
+                return now.plusDays(1);
+            case "Два дня":
+                return now.plusDays(2);
+            case "Неделю":
+                return now.plusDays(7);
+            case "Две недели":
+                return now.plusDays(14);
+            case "Месяц":
+                return now.plusDays(Calendar.getInstance().getMaximum(Calendar.DAY_OF_MONTH));
+            default:
+                return now;
+        }
     }
 
-    private Date zonedDateToDate(LocalDateTime localDateTime, String timeZone){
-        return Date.from(localDateTime.atZone(ZoneId.of("UTC"+timeZone)).toInstant());
+    private void startTimer(String msg, User user){
+        timersService.startTimer(Date.from(zonedDateTime.toInstant()), user.getAppId(), msg);
     }
+
 }

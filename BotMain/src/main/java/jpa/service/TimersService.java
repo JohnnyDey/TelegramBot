@@ -10,7 +10,9 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -31,14 +33,18 @@ public class TimersService implements Serializable {
         timerService.createSingleActionTimer(date, new TimerConfig(new TimerId(to, msg), true));
     }
 
-    public boolean stopTimer(String id) {
-        Optional<Timer> first = findTimer(id);
+    public boolean stopTimer(TimerId timerId) {
+        Optional<Timer> first = findTimer(timerId);
         first.ifPresent(javax.ejb.Timer::cancel);
         return first.isPresent();
     }
 
-    private Optional<Timer> findTimer(String id) {
-        return timerService.getAllTimers().stream().filter(timer -> timer.getInfo().equals(id)).findFirst();
+    private Optional<Timer> findTimer(TimerId timerId) {
+        return timerService.getAllTimers().stream().filter(timer -> timer.getInfo().equals(timerId)).findFirst();
+    }
+
+    public List<Timer> findTimers(Long id) {
+        return timerService.getAllTimers().stream().filter(timer -> ((TimerId)timer.getInfo()).getId().equals(id)).collect(Collectors.toList());
     }
 
     public void stopTimers() {
