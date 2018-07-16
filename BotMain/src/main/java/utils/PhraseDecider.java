@@ -37,10 +37,10 @@ public abstract class PhraseDecider {
         }else {
             if(message.startsWith("/хватит")){
                 command.interrupt();
-                return null;
+                return commandInstance.get().execute(message, user);
             } else {
                 command.clearPhases();
-                return command.nextPhase(message, user);
+                return command.nextPhase(message.trim(), user);
             }
         }
     }

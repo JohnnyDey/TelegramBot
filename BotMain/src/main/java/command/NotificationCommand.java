@@ -9,9 +9,9 @@ public class NotificationCommand extends AbstractCommand {
     @Override
     public List<Object> execute(String message, User user) {
         if (user.isNotify()){
-            putPhase(phraseUtil.askToStopNotify());
+            putPhases(phraseUtil.askToStopNotify());
         } else {
-            putPhase(phraseUtil.askToStartNotify());
+            putPhases(phraseUtil.askToStartNotify());
         }
         return completeExecution();
     }
@@ -31,9 +31,9 @@ public class NotificationCommand extends AbstractCommand {
             return finishExecution();
         } else {
             if(user.isNotify()){
-                putPhase(phraseUtil.getNotifyHelp("выключить"));
+                putPhases(phraseUtil.getNotifyHelp("выключить"));
             }else {
-                putPhase(phraseUtil.getNotifyHelp("включить"));
+                putPhases(phraseUtil.getNotifyHelp("включить"));
             }
 
         }

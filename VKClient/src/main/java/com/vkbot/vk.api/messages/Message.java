@@ -1,4 +1,4 @@
-package com.vkbot.vk.api;
+package com.vkbot.vk.api.messages;
 
 import com.google.gson.annotations.SerializedName;
 import com.vk.api.sdk.objects.base.BoolInt;
@@ -394,15 +394,15 @@ public class Message {
         this.geo = geo;
     }
 
-    boolean isStickerMessage(){
+    public boolean isStickerMessage(){
         return attachments.size() == 1 && attachments.get(0).getSticker() != null;
     }
 
-    boolean isVoiceMessage(){
+    public boolean isVoiceMessage(){
         return attachments.size() == 1 && attachments.get(0).getAudio() != null;
     }
 
-    boolean isSimpleTextMessage(){
+    public boolean isSimpleTextMessage(){
         return attachments.size() == 0 && body.length() > 0;
     }
 }

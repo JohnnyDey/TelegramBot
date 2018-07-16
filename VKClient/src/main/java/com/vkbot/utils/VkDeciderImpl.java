@@ -5,6 +5,7 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.queries.users.UsersNameCase;
+import com.vkbot.vk.api.messages.Message;
 import jpa.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,13 +28,13 @@ public class VkDeciderImpl extends PhraseDecider implements VkDecider {
     @Inject @Named("actor")
     private GroupActor groupActor;
 
-    public List<Object> onText(com.vkbot.vk.api.Message message){
+    public List<Object> onText(Message message){
         User user = userServiceImp.getUserByAppId(Long.valueOf(message.getFromId()), User.AppType.VK.name());
-        registerUserIfNeed(user, Long.valueOf(message.getFromId()));
+        user = registerUserIfNeed(user, Long.valueOf(message.getFromId()));
         return onText(message.getBody(), user);
     }
 
-    private void registerUserIfNeed(User user, Long id){
+    private User registerUserIfNeed(User user, Long id){
         if(user == null){
             user = new User();
             user.setUserName(getUserNameByApi(id));
@@ -42,6 +43,7 @@ public class VkDeciderImpl extends PhraseDecider implements VkDecider {
             user.setAppType(User.AppType.VK.name());
             userServiceImp.saveUser(user);
         }
+        return user;
     }
 
     private String getUserNameByApi(Long id){

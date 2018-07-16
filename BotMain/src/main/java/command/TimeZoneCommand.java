@@ -13,9 +13,9 @@ public class TimeZoneCommand extends AbstractCommand {
     public List<Object> execute(String message, User user) {
         if(user.getTimeZone() != null){
             LocalTime now = LocalTime.now(ZoneOffset.of(user.getTimeZone()));
-            putPhase(phraseUtil.timeZoneExist(getFormattedTime(now)));
+            putPhases(phraseUtil.timeZoneExist(getFormattedTime(now)));
         } else {
-            putPhase(phraseUtil.emptyTimeZone());
+            putPhases(phraseUtil.emptyTimeZone());
         }
         return completeExecution();
     }
