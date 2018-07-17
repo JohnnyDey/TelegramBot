@@ -28,12 +28,12 @@ public class CallbackDispatcher extends Application {
     public String get(@Context HttpServletRequest request) throws IOException {
         logger.info("got a message" );
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = request.getReader()) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
-            }
-        }
+//        try (BufferedReader reader = request.getReader()) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line).append('\n');
+//            }
+//        }
 
         request.setCharacterEncoding("UTF-8");
         Reader r = request.getReader();
