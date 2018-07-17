@@ -46,6 +46,6 @@ public class NotificationCommand extends AbstractCommand {
         } else {
             user.setNotify(true);
         }
-        userServiceImp.saveUser(user);
+//        userServiceImp.saveUser(user);
     }
 }

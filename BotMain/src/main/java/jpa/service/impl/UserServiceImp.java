@@ -5,14 +5,13 @@ import jpa.service.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
 
 public class UserServiceImp implements UserService {
 
-    @PersistenceContext(unitName = "bot.persistence.tb")
+//    @PersistenceContext(unitName = "bot.persistence.tb")
     private EntityManager entityManager;
 
     @Override

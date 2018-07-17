@@ -20,7 +20,7 @@ public class NotifyAllCommand extends AbstractCommand {
     @Override
     public List<Object> nextPhase(String message, User user) {
         NotifyAll notifyAll = new NotifyAll();
-        notifyAll.setUsersToNotify(userServiceImp.getAllUsersToNotify());
+//        notifyAll.setUsersToNotify(userServiceImp.getAllUsersToNotify());
         notifyAll.setMsg(message);
         notifyAll.setDisclaimer(phraseUtil.howToNotify());
         notifyAllEvent.fire(notifyAll);

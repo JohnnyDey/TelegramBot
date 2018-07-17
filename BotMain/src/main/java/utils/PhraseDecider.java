@@ -1,12 +1,12 @@
 package utils;
 
+import command.AbstractCommand;
+import command.Command;
 import command.factory.CommandFactory;
 import jpa.entity.User;
 import jpa.entity.UserId;
-import jpa.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import command.*;
 
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
@@ -17,8 +17,8 @@ public abstract class PhraseDecider {
 
     private final Logger logger = LoggerFactory.getLogger(PhraseDecider.class);
 
-    @Inject
-    transient protected UserService userServiceImp;
+//    @Inject
+//    transient protected UserService userServiceImp;
 
     @Inject
     private CommandFactory factory;

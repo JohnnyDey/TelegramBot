@@ -2,7 +2,6 @@ package command;
 
 import jpa.entity.User;
 import jpa.service.TimersService;
-import jpa.service.UserService;
 import utils.PhraseUtil;
 
 import javax.inject.Inject;
@@ -12,8 +11,8 @@ import java.util.List;
 
 public abstract class AbstractCommand implements Command {
 
-    @Inject
-    UserService userServiceImp;
+//    @Inject
+//    UserService userServiceImp;
 
     @Inject
     TimersService timersService;

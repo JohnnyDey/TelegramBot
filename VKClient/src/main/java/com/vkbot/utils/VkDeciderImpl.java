@@ -29,20 +29,18 @@ public class VkDeciderImpl extends PhraseDecider implements VkDecider {
     private GroupActor groupActor;
 
     public List<Object> onText(Message message){
-        User user = userServiceImp.getUserByAppId(Long.valueOf(message.getFromId()), User.AppType.VK.name());
-        user = registerUserIfNeed(user, Long.valueOf(message.getFromId()));
-        return onText(message.getBody(), user);
+//        User user = userServiceImp.getUserByAppId(Long.valueOf(message.getFromId()), User.AppType.VK.name());
+        User user = registerUserIfNeed(Long.valueOf(message.getFromId()));
+        return onText(message.getBody(), null);
     }
 
-    private User registerUserIfNeed(User user, Long id){
-        if(user == null){
-            user = new User();
-            user.setUserName(getUserNameByApi(id));
-            user.setAppId(id);
-            user.setNotify(true);
-            user.setAppType(User.AppType.VK.name());
-            userServiceImp.saveUser(user);
-        }
+    private User registerUserIfNeed(Long id){
+        User user = new User();
+        user.setUserName(getUserNameByApi(id));
+        user.setAppId(id);
+        user.setNotify(true);
+        user.setAppType(User.AppType.VK.name());
+//            userServiceImp.saveUser(user);
         return user;
     }
 
