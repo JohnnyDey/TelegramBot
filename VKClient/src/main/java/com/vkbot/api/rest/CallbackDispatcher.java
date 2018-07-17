@@ -10,7 +10,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class CallbackDispatcher extends Application {
     private Logger logger = LoggerFactory.getLogger(App.class);
 
     @GET
-    public Response get(@Context HttpServletRequest request) throws IOException {
+    public String get(@Context HttpServletRequest request) throws IOException {
         logger.info("got a message" );
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
@@ -37,6 +36,6 @@ public class CallbackDispatcher extends Application {
         logger.info("The message is " + sb.toString());
         callbackApiHandler.parse(sb.toString());
 
-        return Response.ok().build();
+        return callbackApiHandler.getCallBack();
     }
 }
