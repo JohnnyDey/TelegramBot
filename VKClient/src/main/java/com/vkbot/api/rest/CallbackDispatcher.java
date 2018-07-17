@@ -42,6 +42,7 @@ public class CallbackDispatcher extends Application {
     }
 
     private String encode(String string){
+        logger.info("before encoding: " + string);
         return new String(new String(string.getBytes(), Charset.forName("UTF-8")).getBytes(Charset.forName("CP1252")));
     }
 }
