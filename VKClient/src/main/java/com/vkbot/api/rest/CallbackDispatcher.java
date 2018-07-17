@@ -13,6 +13,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Map;
 
 @Provider
 @Path("/callback")
@@ -27,7 +29,10 @@ public class CallbackDispatcher extends Application {
     public String get(@Context HttpServletRequest request) throws IOException {
         logger.info("got a message" );
         StringBuilder sb = new StringBuilder();
-        logger.info("body param" + request.getParameterMap().get("body")[0]);
+        for(Map.Entry<String, String[]> e : request.getParameterMap().entrySet()){
+            logger.info("body param" + e.getKey() + " " + Arrays.toString(e.getValue()));
+        }
+
         try (BufferedReader reader = request.getReader()) {
             String line;
             while ((line = reader.readLine()) != null) {
