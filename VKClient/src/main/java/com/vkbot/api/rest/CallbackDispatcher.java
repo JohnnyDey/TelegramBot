@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
@@ -23,7 +23,7 @@ public class CallbackDispatcher extends Application {
 
     private Logger logger = LoggerFactory.getLogger(App.class);
 
-    @GET
+    @POST
     public String get(@Context HttpServletRequest request) throws IOException {
         logger.info("got a message" );
         StringBuilder sb = new StringBuilder();
