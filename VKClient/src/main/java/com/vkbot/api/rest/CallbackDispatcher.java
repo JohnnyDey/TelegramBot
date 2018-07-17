@@ -13,6 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URLDecoder;
 
 @Provider
 @Path("/callback")
@@ -33,8 +34,9 @@ public class CallbackDispatcher extends Application {
                 sb.append(line).append('\n');
             }
         }
-        logger.info("The message is " + sb.toString());
-        callbackApiHandler.parse(sb.toString());
+        String decode = URLDecoder.decode(sb.toString(), "UTF-8");
+        logger.info("The message is " + decode);
+        callbackApiHandler.parse(decode);
 
         return callbackApiHandler.getCallBack();
     }
