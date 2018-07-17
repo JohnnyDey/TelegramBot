@@ -1,4 +1,4 @@
-package com.vkbot.vk.api.messages;
+package com.vkbot.api.messages;
 
 import com.google.gson.annotations.SerializedName;
 import com.vk.api.sdk.objects.base.BoolInt;

@@ -5,7 +5,7 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.queries.users.UsersNameCase;
-import com.vkbot.vk.api.messages.Message;
+import com.vkbot.api.messages.Message;
 import jpa.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

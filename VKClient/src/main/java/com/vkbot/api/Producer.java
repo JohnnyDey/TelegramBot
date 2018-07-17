@@ -1,4 +1,4 @@
-package com.vkbot.vk.api;
+package com.vkbot.api;
 
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;

@@ -1,5 +1,6 @@
-package com.vkbot.vk.api.keyboard;
+package com.vkbot.api.keyboard;
 
+import command.InfoCommand;
 import command.factory.CommandFactory;
 import utils.KeyboardMap;
 
@@ -15,8 +16,24 @@ public class KeyboardMatcher {
                 return createSetTimeMap();
             case YES_OR_NO:
                 return createYesNoMap();
+            case PERSONS:
+                return createPersonMap();
+            case NEXT:
+                return createNextMap();
         }
         return null;
+    }
+
+    private static Keyboard createNextMap() {
+        return generalKeyboard()
+                .addToLine(0, Button.Color.NEGATIVE, CommandFactory.CANCEL)
+                .addToLine(0, Button.Color.POSITIVE, CommandFactory.NEXT);
+    }
+
+    private static Keyboard createPersonMap() {
+        return generalKeyboard()
+                .addToLine(0, Button.Color.PRIMARY, InfoCommand.Person.NASTYA.getName())
+                .addToLine(1, Button.Color.NEGATIVE, CommandFactory.CANCEL);
     }
 
     private static Keyboard createSetTimeMap() {

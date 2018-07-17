@@ -19,6 +19,7 @@ public class CommandFactory {
     public static final String REMIND = "Напомнить";
     public static final String MY_REMINDS = "Мои напоминалки";
     public static final String CANCEL = "Хватит";
+    public static final String NEXT = "Дальше";
 
     @Inject
     private Instance<Command> commandInstance;

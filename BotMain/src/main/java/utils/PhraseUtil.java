@@ -53,6 +53,20 @@ public class PhraseUtil implements Serializable {
         return list;
     }
 
+    public List<Object> choosePerson() {
+        List<Object> list = new ArrayList<>();
+        list.add(KeyboardMap.PERSONS);
+        list.add(properties.getProperty("info.choose"));
+        return list;
+    }
+
+    public List<Object> personInfo(String name, int i) {
+        List<Object> list = new ArrayList<>();
+        list.add(KeyboardMap.NEXT);
+        list.add(properties.getProperty("info." + name + "." + i));
+        return list;
+    }
+
     public List<Object> getHelp() {
         List<Object> list = new ArrayList<>();
         list.add(properties.getProperty("help.list"));

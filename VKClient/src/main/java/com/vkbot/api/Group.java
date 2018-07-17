@@ -1,21 +1,22 @@
-package com.vkbot.vk.api;
+package com.vkbot.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.vk.api.sdk.actions.LongPoll;
+import com.vk.api.sdk.callback.CallbackApi;
 import com.vk.api.sdk.callback.longpoll.responses.GetLongPollEventsResponse;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse;
-import com.vkbot.vk.api.messages.Message;
+import com.vkbot.api.messages.Message;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public abstract class Group {
+public abstract class Group extends CallbackApi {
 
     @Inject @Named("api")
     protected VkApiClient apiClient;
@@ -63,7 +64,11 @@ public abstract class Group {
         try {
             execute = longPoll.getEvents(server, key, ts).waitTime(5).execute();
         } catch (ApiException | ClientException e) {
-            e.printStackTrace();
+            try {
+                init();
+            } catch (ClientException | ApiException e1) {
+                e1.printStackTrace();
+            }
         }
         if (execute != null && execute.getUpdates().size() > 0) {
             execute.getUpdates().forEach(this::selectHandler);
