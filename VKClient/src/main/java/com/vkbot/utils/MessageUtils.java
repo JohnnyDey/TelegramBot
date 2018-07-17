@@ -5,6 +5,6 @@ import com.vk.api.sdk.objects.messages.Message;
 public class MessageUtils {
 
     public static boolean isTextMessage(Message message){
-        return message.getAttachments().size() == 0;
+        return message.getAttachments() == null || message.getAttachments().size() == 0;
     }
 }
