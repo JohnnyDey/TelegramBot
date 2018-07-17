@@ -1,6 +1,6 @@
 package com.vkbot.utils;
 
-import com.vkbot.api.messages.Message;
+import com.vk.api.sdk.objects.messages.Message;
 
 import java.util.List;
 

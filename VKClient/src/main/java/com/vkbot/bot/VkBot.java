@@ -5,12 +5,12 @@ import action.TimerRemind;
 import com.google.gson.Gson;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.objects.messages.Message;
 import com.vk.api.sdk.queries.messages.MessagesSendQuery;
-import com.vkbot.utils.VkDecider;
 import com.vkbot.api.Group;
 import com.vkbot.api.keyboard.Keyboard;
 import com.vkbot.api.keyboard.KeyboardMatcher;
-import com.vkbot.api.messages.Message;
+import com.vkbot.utils.VkDecider;
 import jpa.entity.TimerId;
 import jpa.entity.User;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class VkBot extends Group {
     private Keyboard keyboard;
 
     @Override
-    protected void simpleTextMessageHandle(Message message) {
+    public void simpleTextMessageHandle(Message message) {
         List<Object> messages = decider.onText(message);
         Iterator<Object> iterator = messages.iterator();
         do {
@@ -55,12 +55,12 @@ public class VkBot extends Group {
     }
 
     @Override
-    protected void stickerHandle(Message message) {
+    public void stickerHandle(Message message) {
 
     }
 
     @Override
-    protected void voiceMessageHandle(Message message) {
+    public void voiceMessageHandle(Message message) {
 //        new Message().from(this).to(message.authorId()).sendVoiceMessage("/home/aleksey/Downloads/1.mp3");
     }
 

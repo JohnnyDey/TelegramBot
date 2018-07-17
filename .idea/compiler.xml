@@ -9,7 +9,6 @@
         <module name="BotMain" />
         <module name="oscar" />
         <module name="Server" />
-        <module name="TelegramClient" />
         <module name="VKClient" />
       </profile>
     </annotationProcessing>

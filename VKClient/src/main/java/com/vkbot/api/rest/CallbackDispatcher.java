@@ -22,11 +22,11 @@ public class CallbackDispatcher extends Application {
     @Inject
     private CallbackHandler callbackApiHandler;
 
-    private Logger logger = LoggerFactory.getLogger(CallbackDispatcher.class);
+    private Logger logger = LoggerFactory.getLogger(App.class);
 
     @GET
     public Response get(@Context HttpServletRequest request) throws IOException {
-        logger.info("GOT IT!");
+        logger.info("got a message" );
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
             String line;
@@ -34,7 +34,7 @@ public class CallbackDispatcher extends Application {
                 sb.append(line).append('\n');
             }
         }
-        System.out.println(sb.toString());
+        logger.info("The message is " + sb.toString());
         callbackApiHandler.parse(sb.toString());
 
         return Response.ok().build();

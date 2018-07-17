@@ -10,7 +10,7 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse;
-import com.vkbot.api.messages.Message;
+import com.vk.api.sdk.objects.messages.Message;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -44,7 +44,7 @@ public abstract class Group extends CallbackApi {
     }
 
     public void startBot(){
-        on = true;
+        on = false;
         new Thread(() -> {
             if(longPoll == null){
                 longPoll = apiClient.longPoll();
@@ -78,19 +78,20 @@ public abstract class Group extends CallbackApi {
 
     private void selectHandler(JsonObject json){
         Message message = new Gson().fromJson(json.get("object"), Message.class);
-        if(message.isSimpleTextMessage()){
-            simpleTextMessageHandle(message);
-        } else if(message.isStickerMessage()){
-            stickerHandle(message);
-        } else if(message.isVoiceMessage()){
-            voiceMessageHandle(message);
-        }
+//        if(message.isSimpleTextMessage()){
+//            simpleTextMessageHandle(message);
+//        } else if(message.isStickerMessage()){
+//            stickerHandle(message);
+//        } else if(message.isVoiceMessage()){
+//            voiceMessageHandle(message);
+//        }
     }
 
-    protected abstract void simpleTextMessageHandle(Message message);
 
-    protected abstract void stickerHandle(Message message);
+    public abstract void simpleTextMessageHandle(Message message);
 
-    protected abstract void voiceMessageHandle(Message message);
+    public abstract void stickerHandle(Message message);
+
+    public abstract void voiceMessageHandle(Message message);
 
 }

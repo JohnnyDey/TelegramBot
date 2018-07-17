@@ -17,6 +17,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/TelegramClient/pom.xml" />
         <option value="$PROJECT_DIR$/Vk.Api/pom.xml" />
       </set>
     </option>
