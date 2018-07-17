@@ -13,9 +13,6 @@ import utils.PhraseDecider;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,20 +31,7 @@ public class VkDeciderImpl extends PhraseDecider implements VkDecider {
     public List<Object> onText(Message message){
 //        User user = userServiceImp.getUserByAppId(Long.valueOf(message.getFromId()), User.AppType.VK.name());
         User user = registerUserIfNeed(Long.valueOf(message.getUserId()));
-        String decode = encode(message.getBody());
-        return onText(decode, user);
-    }
-
-    private String encode(String string){
-        logger.info("before encoding: " + string);
-        try {
-            logger.info("Just try" + URLDecoder.decode(string, "UTF-8"));
-            logger.info("Just try" + URLDecoder.decode(string, "CP1252"));
-            logger.info("Just try" + URLDecoder.decode(string, "CP1252"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new String(new String(string.getBytes(), Charset.forName("UTF-8")).getBytes(Charset.forName("CP1252")));
+        return onText(message.getBody(), user);
     }
 
     private User registerUserIfNeed(Long id){
