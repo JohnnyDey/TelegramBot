@@ -43,9 +43,9 @@ public class VkBot extends Group {
             if(iterator.hasNext()){
                 Object msg = iterator.next();
                 if(msg instanceof String){
-                    sendMessage(String.valueOf(msg), message.getFromId());
+                    sendMessage(String.valueOf(msg), message.getUserId());
                 } else if(msg instanceof Integer){
-                    sendSticker((Integer) msg, message.getFromId());
+                    sendSticker((Integer) msg, message.getUserId());
                 }else if(msg instanceof KeyboardMap){
                     setKeyboard((KeyboardMap) msg);
                 }

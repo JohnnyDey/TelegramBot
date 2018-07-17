@@ -30,7 +30,7 @@ public class VkDeciderImpl extends PhraseDecider implements VkDecider {
 
     public List<Object> onText(Message message){
 //        User user = userServiceImp.getUserByAppId(Long.valueOf(message.getFromId()), User.AppType.VK.name());
-        User user = registerUserIfNeed(Long.valueOf(message.getFromId()));
+        User user = registerUserIfNeed(Long.valueOf(message.getUserId()));
         return onText(message.getBody(), user);
     }
 
