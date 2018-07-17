@@ -11,8 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
-import java.io.*;
-import java.nio.charset.MalformedInputException;
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Provider
@@ -27,35 +26,36 @@ public class CallbackDispatcher extends Application {
     @POST
     public String get(@Context HttpServletRequest request) throws IOException {
         logger.info("got a message" );
-        StringBuilder sb = new StringBuilder();
+        request.setCharacterEncoding("UTF-8");
+//        StringBuilder sb = new StringBuilder();
 //        try (BufferedReader reader = request.getReader()) {
 //            String line;
 //            while ((line = reader.readLine()) != null) {
 //                sb.append(line).append('\n');
 //            }
 //        }
+//
+//
+//        Reader r = request.getReader();
+//
+//        Writer w = new StringWriter();
+//
+//        try {
+//            // Copy one character at a time
+//            int c = r.read();
+//            while (c != -1) {
+//                w.write(c);
+//                c = r.read();
+//            }
+//            w.close();
+//        } catch (MalformedInputException mie) {
+//        }
 
-        request.setCharacterEncoding("UTF-8");
-        Reader r = request.getReader();
-
-        Writer w = new StringWriter();
-
-        try {
-            // Copy one character at a time
-            int c = r.read();
-            while (c != -1) {
-                w.write(c);
-                c = r.read();
-            }
-            w.close();
-        } catch (MalformedInputException mie) {
-        }
-
-        String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        logger.info("The message is " + sb.toString());
-        logger.info("The string is " + test);
-        logger.info(w.toString());
-        callbackApiHandler.parse(sb.toString());
+        String msg = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+//        logger.info("The message is " + sb.toString());
+        logger.info("The msg is " + msg);
+//        logger.info(w.toString());
+        callbackApiHandler.parse(msg);
 
         return callbackApiHandler.getCallBack();
     }
