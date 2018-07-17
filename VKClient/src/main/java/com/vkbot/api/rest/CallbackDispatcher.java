@@ -13,7 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URLDecoder;
+import java.nio.charset.Charset;
 
 @Provider
 @Path("/callback")
@@ -34,10 +34,14 @@ public class CallbackDispatcher extends Application {
                 sb.append(line).append('\n');
             }
         }
-        String decode = URLDecoder.decode(sb.toString(), "UTF-8");
+        String decode = encode(sb.toString());
         logger.info("The message is " + decode);
         callbackApiHandler.parse(decode);
 
         return callbackApiHandler.getCallBack();
+    }
+
+    private String encode(String string){
+        return new String(new String(string.getBytes(), Charset.forName("UTF-8")).getBytes(Charset.forName("CP1252")));
     }
 }

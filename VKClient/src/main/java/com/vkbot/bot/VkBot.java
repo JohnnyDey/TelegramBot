@@ -78,7 +78,6 @@ public class VkBot extends Group {
             if(keyboard != null) {
                 sendQuery.unsafeParam("keyboard", new Gson().toJson(keyboard));
             }
-            logger.info("Sending msg" + message);
              sendQuery.execute();
         } catch (ApiException | ClientException e) {
             logger.error("Exception while sending msg: ", e.getMessage());
