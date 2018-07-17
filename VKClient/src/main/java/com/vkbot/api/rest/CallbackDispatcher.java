@@ -34,7 +34,7 @@ public class CallbackDispatcher extends Application {
                 sb.append(line).append('\n');
             }
         }
-        String decode = URLDecoder.decode(sb.toString(), "UTF-8");
+        String decode = URLDecoder.decode(sb.toString(), "WINDOWS-1251");
         logger.info("The message is " + decode);
         callbackApiHandler.parse(decode);
 
