@@ -27,7 +27,7 @@ public class CallbackDispatcher extends Application {
     public String get(@Context HttpServletRequest request) throws IOException {
         logger.info("got a message" );
         StringBuilder sb = new StringBuilder();
-
+        logger.info("body param" + request.getParameterMap().get("body")[0]);
         try (BufferedReader reader = request.getReader()) {
             String line;
             while ((line = reader.readLine()) != null) {
