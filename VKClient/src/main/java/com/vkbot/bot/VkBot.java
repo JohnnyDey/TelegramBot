@@ -3,11 +3,12 @@ package com.vkbot.bot;
 import action.NotifyAll;
 import action.TimerRemind;
 import com.google.gson.Gson;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.Message;
 import com.vk.api.sdk.queries.messages.MessagesSendQuery;
-import com.vkbot.api.Group;
 import com.vkbot.api.keyboard.Keyboard;
 import com.vkbot.api.keyboard.KeyboardMatcher;
 import com.vkbot.utils.VkDecider;
@@ -22,11 +23,12 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Iterator;
 import java.util.List;
 
 @ApplicationScoped
-public class VkBot extends Group {
+public class VkBot {
 
     private final Logger logger = LoggerFactory.getLogger(VkBot.class);
 
@@ -35,7 +37,12 @@ public class VkBot extends Group {
 
     private Keyboard keyboard;
 
-    @Override
+    @Inject @Named("api")
+    protected VkApiClient apiClient;
+
+    @Inject @Named("actor")
+    protected GroupActor groupActor;
+
     public void simpleTextMessageHandle(Message message) {
         List<Object> messages = decider.onText(message);
         Iterator<Object> iterator = messages.iterator();
@@ -54,12 +61,10 @@ public class VkBot extends Group {
         keyboard = null;
     }
 
-    @Override
     public void stickerHandle(Message message) {
 
     }
 
-    @Override
     public void voiceMessageHandle(Message message) {
 //        new Message().from(this).to(message.authorId()).sendVoiceMessage("/home/aleksey/Downloads/1.mp3");
     }
