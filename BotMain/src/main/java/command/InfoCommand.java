@@ -21,14 +21,15 @@ public class InfoCommand extends AbstractCommand {
             choosePerson(message);
             return completeExecution();
         } else {
-            return getInfo();
+            return getInfo(person);
         }
     }
 
     private void choosePerson(String message) {
         if(message.equals(Person.NASTYA.getName())){
-            person = Person.NASTYA;
-            getInfo();
+            getInfo(Person.NASTYA);
+        } else if(message.equals(Person.ALENA.getName())){
+            getInfo(Person.ALENA);
         } else {
             putPhases(phraseUtil.choosePerson());
             iterator = 0;
@@ -36,19 +37,21 @@ public class InfoCommand extends AbstractCommand {
         }
     }
 
-    private List<Object> getInfo(){
+    private List<Object> getInfo(Person person){
+        this.person = person;
         if (person.hasNext(iterator)){
             putPhases(phraseUtil.personInfo(person.name(), ++iterator));
         } else {
             putPhases(phraseUtil.choosePerson());
             iterator = 0;
-            person = null;
+            this.person = null;
         }
         return completeExecution();
     }
 
     public enum Person{
-        NASTYA(3, "Настя");
+        NASTYA(3, "Настя"),
+        ALENA(3, "Алена");
 
         int count;
 

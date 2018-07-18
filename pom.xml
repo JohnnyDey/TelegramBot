@@ -3,7 +3,6 @@
     <packaging>pom</packaging>
     <name>Telegram Bot root</name>
     <modules>
-        <module>TelegramClient</module>
         <module>BotMain</module>
         <module>VKClient</module>
     </modules>
