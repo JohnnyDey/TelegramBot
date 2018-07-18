@@ -32,9 +32,13 @@ public class KeyboardMatcher {
 
     private static Keyboard createPersonMap() {
         return generalKeyboard()
+         //       .addToLine(0, Button.Color.PRIMARY, InfoCommand.Person.OSCAR.getName())
                 .addToLine(0, Button.Color.PRIMARY, InfoCommand.Person.ALENA.getName())
-                .addToLine(0, Button.Color.PRIMARY, InfoCommand.Person.NASTYA.getName())
-                .addToLine(1, Button.Color.NEGATIVE, CommandFactory.CANCEL);
+                .addToLine(0, Button.Color.PRIMARY, InfoCommand.Person.LESHA.getName())
+                .addToLine(1, Button.Color.PRIMARY, InfoCommand.Person.NASTYA.getName())
+                .addToLine(1, Button.Color.PRIMARY, InfoCommand.Person.JENYA.getName())
+                .addToLine(1, Button.Color.PRIMARY, InfoCommand.Person.DIMA.getName())
+                .addToLine(2, Button.Color.NEGATIVE, CommandFactory.CANCEL);
     }
 
     private static Keyboard createSetTimeMap() {

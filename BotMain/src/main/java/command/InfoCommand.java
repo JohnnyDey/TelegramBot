@@ -30,6 +30,14 @@ public class InfoCommand extends AbstractCommand {
             getInfo(Person.NASTYA);
         } else if(message.equals(Person.ALENA.getName())){
             getInfo(Person.ALENA);
+        } else if(message.equals(Person.DIMA.getName())){
+            getInfo(Person.DIMA);
+        } else if(message.equals(Person.JENYA.getName())){
+            getInfo(Person.JENYA);
+        } else if(message.equals(Person.LESHA.getName())){
+            getInfo(Person.LESHA);
+        } else if(message.equals(Person.OSCAR.getName())){
+            getInfo(Person.OSCAR);
         } else {
             putPhases(phraseUtil.choosePerson());
             iterator = 0;
@@ -50,8 +58,12 @@ public class InfoCommand extends AbstractCommand {
     }
 
     public enum Person{
+        OSCAR(3, "Оскар"),
         NASTYA(3, "Настя"),
-        ALENA(3, "Алена");
+        ALENA(3, "Алена"),
+        DIMA(4,"Dima"),
+        JENYA(3, "Женя"),
+        LESHA(4, "Леша");
 
         int count;
 
