@@ -61,7 +61,7 @@ public class InfoCommand extends AbstractCommand {
         OSCAR(3, "Оскар"),
         NASTYA(3, "Настя"),
         ALENA(3, "Алена"),
-        DIMA(4,"Dima"),
+        DIMA(4,"Дима"),
         JENYA(3, "Женя"),
         LESHA(4, "Леша");
 
