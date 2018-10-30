@@ -16,45 +16,4 @@
         <version.wildfly.swarm>1.0.0.Final</version.wildfly.swarm>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>bom</artifactId>
-                <version>${version.wildfly.swarm}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <finalName>demo</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>wildfly-swarm-plugin</artifactId>
-                <version>${version.wildfly.swarm}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-    <dependencies>
-        <!-- Wildfly Swarm Fractions -->
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>jaxrs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>logging</artifactId>
-        </dependency>
-    </dependencies>
 </project>
