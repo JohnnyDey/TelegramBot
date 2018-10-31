@@ -26,6 +26,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
@@ -92,29 +93,13 @@
             <artifactId>resteasy-servlet-initializer</artifactId>
             <version>3.1.4.Final</version>
         </dependency>
+
         <!-- Wildfly Swarm Fractions -->
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>jaxrs</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>logging</artifactId>
 
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>undertow</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>cdi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>transactions</artifactId>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -128,8 +113,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
-
-
 </project>
