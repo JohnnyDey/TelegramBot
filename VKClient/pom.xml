@@ -14,14 +14,14 @@
     <build>
         <finalName>vkbot</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<source>8</source>-->
+                    <!--<target>8</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
                 <artifactId>wildfly-swarm-plugin</artifactId>
@@ -85,6 +85,20 @@
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>logging</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>undertow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>cdi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>transactions</artifactId>
         </dependency>
     </dependencies>
 

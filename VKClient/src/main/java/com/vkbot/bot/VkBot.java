@@ -129,4 +129,8 @@ public class VkBot {
             }
         }
     }
+
+    public static void main(String... a){
+        System.out.println("check mate");
+    }
 }
