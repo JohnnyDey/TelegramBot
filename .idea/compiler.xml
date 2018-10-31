@@ -19,7 +19,7 @@
       <module name="TelegramBot" target="1.5" />
       <module name="TelegramClient" target="8" />
       <module name="VkApi" target="8" />
-      <module name="VKClient" target="8" />
+      <module name="VKClient" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
