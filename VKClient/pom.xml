@@ -33,16 +33,16 @@
                     <execution>
                         <id>copy-resources</id>
                         <!-- here the phase you need -->
-                        <phase>deploy</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${parent.build.directory}</outputDirectory>
+                            <outputDirectory>../target</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/vkbot-swarm.jar</directory>
-                                    <filtering>true</filtering>
+                                    <directory>${project.build.directory}</directory>
+                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
