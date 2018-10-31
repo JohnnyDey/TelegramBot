@@ -43,7 +43,10 @@
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}</directory>
-                                    <filtering>false</filtering>
+                                    <!--<filtering>false</filtering>-->
+                                    <includes>
+                                        <include>*.jar</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
