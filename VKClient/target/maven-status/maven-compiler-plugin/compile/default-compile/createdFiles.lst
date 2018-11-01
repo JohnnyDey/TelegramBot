@@ -1,0 +1,15 @@
+com\vkbot\api\keyboard\Action.class
+com\vkbot\api\keyboard\KeyboardMatcher$1.class
+com\vkbot\utils\VkDecider.class
+com\vkbot\api\keyboard\KeyboardMatcher.class
+com\vkbot\utils\VkDeciderImpl.class
+com\vkbot\utils\MessageUtils.class
+com\vkbot\api\keyboard\Button.class
+com\vkbot\api\messages\CallbackHandler.class
+com\vkbot\api\keyboard\Button$Color.class
+com\vkbot\bot\VkBot.class
+com\vkbot\api\rest\CallbackDispatcher.class
+com\vkbot\api\Producer.class
+com\vkbot\api\keyboard\Keyboard.class
+com\vkbot\api\rest\Status.class
+com\vkbot\api\rest\App.class
