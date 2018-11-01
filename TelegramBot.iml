@@ -80,11 +80,9 @@
     <orderEntry type="library" name="Maven: org.jboss.openjdk-orb:openjdk-orb:8.0.4.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
-    <orderEntry type="library" name="Maven: org.wildfly.swarm:ejb:2018.5.0" level="project" />
+    <orderEntry type="library" name="Maven: org.wildfly.swarm:resource-adapters:2018.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:jca:2018.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:connector:2018.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.resource:jboss-connector-api_1.7_spec:1.0.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.spec.javax.ejb:jboss-ejb-api_3.2_spec:1.0.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.ejb3:jboss-ejb3-ext-api:2.2.0.Final" level="project" />
   </component>
 </module>
