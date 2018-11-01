@@ -33,18 +33,9 @@
         </dependency>
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
-            <artifactId>ejb</artifactId>
-            <version>2017.10.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
             <artifactId>cdi</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>security</artifactId>
-            <version>2017.10.0</version>
-        </dependency>
+
 
 
     </dependencies>
