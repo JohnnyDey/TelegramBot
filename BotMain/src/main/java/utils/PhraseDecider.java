@@ -17,9 +17,6 @@ public abstract class PhraseDecider {
 
     private final Logger logger = LoggerFactory.getLogger(PhraseDecider.class);
 
-//    @Inject
-//    transient protected UserService userServiceImp;
-
     @Inject
     private CommandFactory factory;
 

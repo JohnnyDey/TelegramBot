@@ -27,7 +27,7 @@ public class MyReminds extends AbstractCommand {
 
     @Override
     public List<Object> nextPhase(String message, User user) {
-        Integer index = Integer.parseInt(message) - 1;
+        int index = Integer.parseInt(message) - 1;
         if(timers.size() > index && index >= 0){
             timers.get(index).cancel();
             return refreshTimers(user.getAppId());
