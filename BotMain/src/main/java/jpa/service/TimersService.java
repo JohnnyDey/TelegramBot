@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class TimersService implements Serializable {
 
-    @Resource
+//    @Resource
     private TimerService timerService;
 
     @Inject
