@@ -24,7 +24,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: javax:javaee-api:7.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.7" level="project" />
     <orderEntry type="module" module-name="BotMain" />
     <orderEntry type="library" name="Maven: com.vk.api:sdk:0.5.12" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.1" level="project" />
@@ -61,6 +60,7 @@
     <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-servlet-initializer:3.1.4.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.7" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:jaxrs:1.0.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:container:1.0.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:container-api:1.0.2.Final" level="project" />
